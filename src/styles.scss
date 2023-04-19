@@ -4,20 +4,20 @@
 @include mat.core();
 
 $my-primary-color: (
-    50 : #e4f3ec,
-    100 : #bbe2cf,
-    200 : #8dceaf,
-    300 : #5fba8f,
-    400 : #3dac77,
-    500 : #1b9d5f,
-    600 : #189557,
-    700 : #148b4d,
-    800 : #108143,
-    900 : #086f32,
-    A100 : #a0ffc1,
-    A200 : #6dffa0,
-    A400 : #3aff7f,
-    A700 : #20ff6e,
+    50 : #ebf1e7,
+    100 : #cedcc4,
+    200 : #aec59c,
+    300 : #8dae74,
+    400 : #749c57,
+    500 : #5c8b39,
+    600 : #548333,
+    700 : #4a782c,
+    800 : #416e24,
+    900 : #305b17,
+    A100 : #b9ff96,
+    A200 : #97ff63,
+    A400 : #75ff30,
+    A700 : #64ff17,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -37,27 +37,27 @@ $my-primary-color: (
 );
 
 $my-accent-color: (
-    50 : #f6ece4,
-    100 : #e8cebc,
-    200 : #d9ae8f,
-    300 : #c98e62,
-    400 : #be7541,
-    500 : #b25d1f,
-    600 : #ab551b,
-    700 : #a24b17,
-    800 : #994112,
-    900 : #8a300a,
-    A100 : #ffcab8,
-    A200 : #ffa485,
-    A400 : #ff7d52,
-    A700 : #ff6a39,
+    50 : #f7eee7,
+    100 : #ecd5c3,
+    200 : #e0ba9b,
+    300 : #d39e72,
+    400 : #c98954,
+    500 : #c07436,
+    600 : #ba6c30,
+    700 : #b26129,
+    800 : #aa5722,
+    900 : #9c4416,
+    A100 : #ffdfd0,
+    A200 : #ffbb9d,
+    A400 : #ff986a,
+    A700 : #ff8651,
     contrast: (
         50 : #000000,
         100 : #000000,
         200 : #000000,
         300 : #000000,
         400 : #000000,
-        500 : #ffffff,
+        500 : #000000,
         600 : #ffffff,
         700 : #ffffff,
         800 : #ffffff,
@@ -70,20 +70,20 @@ $my-accent-color: (
 );
 
 $my-warn-color: (
-    50 : #f0fbf9,
-    100 : #daf4f0,
-    200 : #c2ede7,
-    300 : #a9e6dd,
-    400 : #96e0d5,
-    500 : #84dbce,
-    600 : #7cd7c9,
-    700 : #71d2c2,
-    800 : #67cdbc,
-    900 : #54c4b0,
+    50 : #fcf9f6,
+    100 : #f8f1e8,
+    200 : #f4e8d9,
+    300 : #efdeca,
+    400 : #ebd7be,
+    500 : #e8d0b3,
+    600 : #e5cbac,
+    700 : #e2c4a3,
+    800 : #debe9a,
+    900 : #d8b38b,
     A100 : #ffffff,
-    A200 : #f3fffd,
-    A400 : #c0fff3,
-    A700 : #a7ffef,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #fff5eb,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -116,7 +116,7 @@ $my-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($my-theme);
 
-html, body { height: 100%; }
+html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
