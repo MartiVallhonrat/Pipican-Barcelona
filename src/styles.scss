@@ -1,1 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$my-primary-color: (
+    50 : #e4f3ec,
+    100 : #bbe2cf,
+    200 : #8dceaf,
+    300 : #5fba8f,
+    400 : #3dac77,
+    500 : #1b9d5f,
+    600 : #189557,
+    700 : #148b4d,
+    800 : #108143,
+    900 : #086f32,
+    A100 : #a0ffc1,
+    A200 : #6dffa0,
+    A400 : #3aff7f,
+    A700 : #20ff6e,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-accent-color: (
+    50 : #f6ece4,
+    100 : #e8cebc,
+    200 : #d9ae8f,
+    300 : #c98e62,
+    400 : #be7541,
+    500 : #b25d1f,
+    600 : #ab551b,
+    700 : #a24b17,
+    800 : #994112,
+    900 : #8a300a,
+    A100 : #ffcab8,
+    A200 : #ffa485,
+    A400 : #ff7d52,
+    A700 : #ff6a39,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-warn-color: (
+    50 : #f0fbf9,
+    100 : #daf4f0,
+    200 : #c2ede7,
+    300 : #a9e6dd,
+    400 : #96e0d5,
+    500 : #84dbce,
+    600 : #7cd7c9,
+    700 : #71d2c2,
+    800 : #67cdbc,
+    900 : #54c4b0,
+    A100 : #ffffff,
+    A200 : #f3fffd,
+    A400 : #c0fff3,
+    A700 : #a7ffef,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-primary: mat.define-palette($my-primary-color);
+$my-palette-accent: mat.define-palette($my-accent-color);
+$my-palette-warn: mat.define-palette($my-warn-color);
+
+$my-theme: mat.define-light-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-palette-accent,
+        warn: $my-palette-warn
+    ),
+));
+
+@include mat.all-component-themes($my-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
