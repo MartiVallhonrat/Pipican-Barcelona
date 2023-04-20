@@ -1,40 +1,39 @@
 <div> 
   <mat-toolbar color="primary">
-    <div fxShow="true" fxHide.gt-sm="true">
+    <div class="menu-icon">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
 
-    <span class="companyName" routerLink="/">
+    <div class="companyName" routerLink="/" (click)="sidenav.opened ? sidenav.close() : null">
       <strong>Pipican Barcelona</strong>
-    </span>
+    </div>
+
     <span class="example-spacer"></span>
-    <div fxShow="true" fxHide.lt-md="true">
+
+    <div class="navbar-links">
       <a mat-button routerLink="/about-us">About us</a>
       <a mat-button routerLink="/prices">Prices</a>
       <a mat-button routerLink="/start-page">Start page</a>
       <a mat-button routerLink="/offer">Offer</a>
-      <a mat-button routerLink="/contact">Contact</a>
+      <a mat-button routerLink="/account">Login</a>
     </div>
   </mat-toolbar>
 
-  <mat-sidenav-container fxFlexFill class="example-container">
-
-    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
-      <div fxLayout="column">
-        <a mat-button routerLink="/about-us">About us</a>
-        <a mat-button routerLink="/prices">Prices</a>
-        <a mat-button routerLink="/start-page">Start page</a>
-        <a mat-button routerLink="/offer">Offer</a>
-        <a mat-button routerLink="/contact">Contact</a>
-      </div>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav opened="false">
+      <mat-nav-list class="sidenav-links">
+        <h1><strong>Menu</strong></h1>
+        <a mat-list-item routerLink="/about-us" (click)="sidenav.toggle()">About us</a>
+        <a mat-list-item routerLink="/prices" (click)="sidenav.toggle()">Prices</a>
+        <a mat-list-item routerLink="/start-page" (click)="sidenav.toggle()">Start page</a>
+        <a mat-list-item routerLink="/offer" (click)="sidenav.toggle()">Offer</a>
+        <a mat-list-item routerLink="/account" (click)="sidenav.toggle()"><mat-icon>account_circle</mat-icon>Login</a>
+      </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>
-      Awesome content
-      Awesome content
-      Awesome content
-      Awesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome contentAwesome content
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
