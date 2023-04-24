@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,19 +8,19 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  hide:boolean = true;
 
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+  form = new FormGroup({
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,10}$")]),
   });
 
-  submit() {
-    if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-    }
+  onSubmit() {
+    if (this.form.invalid) {
+      console.log("su muertooooos")
+      return;
+    } 
+  
   }
-  @Input() error?: string | null;
-
-  @Output() submitEM = new EventEmitter();
 }
 

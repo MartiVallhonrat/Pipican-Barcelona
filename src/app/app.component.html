@@ -24,12 +24,12 @@
   <mat-sidenav-container>
     <mat-sidenav #sidenav opened="false">
       <mat-nav-list class="sidenav-links">
-        <h1><strong>Menu</strong></h1>
+        <h1><strong>MENU</strong></h1>
         <a mat-list-item routerLink="/about-us" (click)="sidenav.toggle()">About us</a>
         <a mat-list-item routerLink="/prices" (click)="sidenav.toggle()">Prices</a>
         <a mat-list-item routerLink="/start-page" (click)="sidenav.toggle()">Start page</a>
         <a mat-list-item routerLink="/offer" (click)="sidenav.toggle()">Offer</a>
-        <a mat-list-item routerLink="/account" (click)="sidenav.toggle()"><mat-icon>account_circle</mat-icon>Login</a>
+        <a mat-list-item routerLink="/account" (click)="sidenav.toggle()"><mat-icon class="mat-list-icon">account_circle</mat-icon><span>LOGIN</span></a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

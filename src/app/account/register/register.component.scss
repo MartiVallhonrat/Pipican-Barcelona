@@ -1,0 +1,45 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 0;
+  background-image: url("../../../assets/background-img.jpg");
+}
+
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  width: 80%;
+  max-width: 700px;
+  height: 80%;
+  margin-top: 40px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+}
+
+button {
+  min-width: 100%;
+}

@@ -1,1 +1,45 @@
-<p>register works!</p>
+<div class="container">
+    <mat-card>
+        <mat-card-title class="h1 px-4 pt-3 pb-1" ><strong>REGISTER</strong></mat-card-title>
+        <hr class="m-3">
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <mat-form-field class="pt-4">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="form.get('username')?.errors && form.get('username')?.hasError('required')">Username is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('username')?.errors && form.get('username')?.hasError('minlength')">Username <strong>minimum length is 4</strong></mat-error>
+                </mat-form-field>
+            
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('email')">This <strong>email format </strong>is not correct</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="pb-4">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('minlength')">Password <strong>minimum length is 6</strong></mat-error>
+                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('maxlength')">Password <strong>maximum length is 10</strong></mat-error>
+                    <mat-error *ngIf="form.get('password')?.errors && !form.get('password')?.hasError('minlength') && !form.get('password')?.hasError('maxlength') && form.get('password')?.hasError('pattern')">Password has to have at least one character of each: <strong>upper case, lower case & digit</strong></mat-error>  
+                </mat-form-field>
+
+                <div class="button">
+                    <button color="primary" type="submit" mat-flat-button>Register</button>
+                </div>
+
+                <div class="text-center pt-4">
+                    <p>You alredy have an account? <a routerLink="/account">Login</a></p>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
