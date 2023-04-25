@@ -7,21 +7,21 @@
             
                 <mat-form-field class="pt-4">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Email" formControlName="email">
-                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="form.get('email')?.errors && form.get('email')?.hasError('email')">This <strong>email format </strong>is not correct</mat-error>
+                    <input type="Email" matInput placeholder="Email" formControlName="Email">
+                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('required')">Email is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('Email')">This <strong>email format </strong>is not correct</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="pb-4">
                     <mat-label>Password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="Password">
                     <button mat-icon-button matSuffix (click)="hide = !hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('minlength')">Password <strong>minimum length </strong>is 6</mat-error>
-                    <mat-error *ngIf="form.get('password')?.errors && form.get('password')?.hasError('maxlength')">Password <strong>maximum length </strong>is 10</mat-error>
-                    <mat-error *ngIf="form.get('password')?.errors && !form.get('password')?.hasError('minlength') && !form.get('password')?.hasError('maxlength') && form.get('password')?.hasError('pattern')">Password has to have at least one character of each: <strong>upper case, lower case & digit</strong></mat-error>  
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('required')">Password is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('minlength')">Password <strong>minimum length </strong>is 6</mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('maxlength')">Password <strong>maximum length </strong>is 10</mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && !form.get('Password')?.hasError('minlength') && !form.get('Password')?.hasError('maxlength') && form.get('Password')?.hasError('pattern')">Password has to have at least one character of each: <strong>upper case, lower case & digit</strong></mat-error>  
                 </mat-form-field>
 
                 <div class="button">
