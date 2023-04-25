@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountManagmentService } from '../account-managment.service';
+import User from '../account-interfaces/account.interface';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,6 @@ import { AccountManagmentService } from '../account-managment.service';
 })
 export class RegisterComponent {
   hide:boolean = true;
-  isSubmited: boolean = false;
 
   constructor(
     private accountService: AccountManagmentService,
@@ -27,8 +27,12 @@ export class RegisterComponent {
     if (this.form.invalid) {
       return;
     } 
-    
-    console.log(this.form.value);
+
+    const foundEmail = await this.accountService.getUsers().find((user: User) => user.Email == this.form.value.Email);
+    if(foundEmail !== undefined) {
+      return;
+    }
+
     const response = await this.accountService.addUser(this.form.value);
     console.log(response);
   }
