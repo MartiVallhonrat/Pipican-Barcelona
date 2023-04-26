@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountManagmentService } from '../account-managment.service';
-import User from '../account-interfaces/account.interface';
+import { UserFirebase } from '../account-interfaces/account.interface';
 
 
 @Component({
@@ -32,22 +32,20 @@ export class LoginComponent {
 
     this.accountService.getUsers() 
       .subscribe(users => {
-        debugger
-        const foundUser = users.find((user: User) => user.Email == this.form.value.Email);
-        console.log(foundUser);
+        const foundUser = users.find((user: UserFirebase) => user.Email == this.form.value.Email);
         if(foundUser == undefined) {
           this.notFoundUser= true;
           return;
         };
 
         const matchPassword = foundUser.Password == this.form.value.Password
-        console.log(matchPassword);
         if(matchPassword == false) {
           this.notMatchingPassword= true;
           return;
         };
 
-        console.log("login succes")
+        localStorage.setItem("id", foundUser.id);
+        window.location.replace("");
       });
   }
 }

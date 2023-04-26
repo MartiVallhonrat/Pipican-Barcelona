@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountManagmentService } from '../account-managment.service';
-import User from '../account-interfaces/account.interface';
+import { User } from '../account-interfaces/account.interface';
+
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterComponent {
     DogBreed: new FormControl(null)
   });
 
-  onSubmit() {
+  async onSubmit() {
     this.customError = false;
 
     if (this.form.invalid) {
@@ -41,6 +42,8 @@ export class RegisterComponent {
         }
       });
     
-    this.accountService.addUser(this.form.value);
+    const addedUser = await this.accountService.addUser(this.form.value);
+    localStorage.setItem("id", addedUser.id);
+    window.location.replace("");
   }
 }
