@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import User from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +16,8 @@ export class AccountManagmentService {
     return addDoc(userRef, user);
   }
 
-  getUsers(): User[] | any {
+  getUsers(): Observable<User[]> {
     const userRef = collection(this.firestore, "users");
-    collectionData(userRef)
-      .subscribe(data => {
-        return data;
-      })
+    return collectionData(userRef) as Observable<User[]>;
   }
 }

@@ -10,6 +10,7 @@ import User from '../account-interfaces/account.interface';
 })
 export class RegisterComponent {
   hide:boolean = true;
+  customError?: boolean;
 
   constructor(
     private accountService: AccountManagmentService,
@@ -23,17 +24,23 @@ export class RegisterComponent {
     DogBreed: new FormControl(null)
   });
 
-  async onSubmit() {
+  onSubmit() {
+    this.customError = false;
+
     if (this.form.invalid) {
       return;
     } 
 
-    const foundEmail = await this.accountService.getUsers().find((user: User) => user.Email == this.form.value.Email);
-    if(foundEmail !== undefined) {
-      return;
-    }
+    this.accountService.getUsers() 
+      .subscribe(users => {
+        const foundEmail = users.find((user: User) => user.Email == this.form.value.Email);
 
-    const response = await this.accountService.addUser(this.form.value);
-    console.log(response);
+        if(foundEmail !== undefined) {
+          this.customError= true;
+          return;
+        }
+      });
+    
+    this.accountService.addUser(this.form.value);
   }
 }

@@ -31,6 +31,10 @@
                     <mat-error *ngIf="form.get('Password')?.errors && !form.get('Password')?.hasError('minlength') && !form.get('Password')?.hasError('maxlength') && form.get('Password')?.hasError('pattern')">Password has to have at least one character of each: <strong>upper case, lower case & digit</strong></mat-error>  
                 </mat-form-field>
 
+                <div *ngIf="this.customError">
+                    <p class="text-danger" >This <strong>email is alredy registred</strong> please choose another one.</p>
+                </div>
+
                 <div class="button">
                     <button color="primary" type="submit" mat-flat-button>Register</button>
                 </div>
