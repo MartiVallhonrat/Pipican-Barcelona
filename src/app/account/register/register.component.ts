@@ -26,6 +26,7 @@ export class RegisterComponent {
   });
 
   async onSubmit() {
+    debugger
     this.customError = false;
 
     if (this.form.invalid) {
@@ -37,11 +38,14 @@ export class RegisterComponent {
         const foundEmail = users.find((user: User) => user.Email == this.form.value.Email);
 
         if(foundEmail !== undefined) {
-          this.customError= true;
-          return;
+          this.customError = true;
         }
       });
     
+    if(this.customError) {
+      return;
+    }
+
     const addedUser = await this.accountService.addUser(this.form.value);
     localStorage.setItem("id", addedUser.id);
     window.location.replace("");
