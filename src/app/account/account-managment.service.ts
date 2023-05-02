@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
-import { Firestore, addDoc, collection, collectionData, getFirestore, doc, getDoc, DocumentData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, docData, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountManagmentService {
-  db = getFirestore();
 
   constructor(private firestore: Firestore) { }
 
@@ -22,8 +21,8 @@ export class AccountManagmentService {
     return collectionData(userRef, { idField: "id" }) as Observable<UserFirebase[]>;
   }
 
-  getItemById(id: string): Observable<any> {
-    return collectionData(collection(this.firestore, 'users'),);
+  getItemById(id: string): Observable<UserFirebase> {
+    const userDocRef = doc(this.firestore, `users/${id}`);
+    return docData(userDocRef, { idField: "id" }) as Observable<UserFirebase>;
   }
-    
 }
