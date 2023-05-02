@@ -25,7 +25,7 @@ export class RegisterComponent {
     DogBreed: new FormControl(null)
   });
 
-  async onSubmit() {
+  onSubmit() {
     debugger
     this.customError = false;
 
@@ -33,21 +33,18 @@ export class RegisterComponent {
       return;
     } 
 
-    this.accountService.getUsers() 
-      .subscribe(users => {
-        const foundEmail = users.find((user: User) => user.Email == this.form.value.Email);
-
-        if(foundEmail !== undefined) {
+    this.accountService.getUserByEmail(this.form.value.Email!)
+      .then(async snapshot => {
+        if(snapshot.size === 0) {
+          const addedUser = await this.accountService.addUser(this.form.value);
+          localStorage.setItem("id", addedUser.id);
+          window.location.replace("");
+        } else {
           this.customError = true;
         }
-      });
-    
-    if(this.customError) {
-      return;
-    }
-
-    const addedUser = await this.accountService.addUser(this.form.value);
-    localStorage.setItem("id", addedUser.id);
-    window.location.replace("");
+      })
+      .catch(async error => {
+        console.log("Error getting documents: ", error);
+      }); 
   }
 }

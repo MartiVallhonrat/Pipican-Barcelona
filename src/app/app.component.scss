@@ -1,5 +1,8 @@
+mat-toolbar{
+    min-height: 85px;
+}
 .companyName{
-    max-width: 60px;
+    width: 80px;
 }
 
 img {
@@ -47,6 +50,12 @@ mat-sidenav-container {
     flex: 1 1 auto;
 }
 @media (min-width: 768px) {
+    mat-toolbar{
+        min-height: 100px;
+    }
+    .companyName{
+        width: 100px;
+    }
     .menu-icon {
         display: none;
     }
