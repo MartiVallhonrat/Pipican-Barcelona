@@ -43,7 +43,7 @@ export class RegisterComponent {
           this.customError = true;
         }
       })
-      .catch(async error => {
+      .catch(error => {
         console.log("Error getting documents: ", error);
       }); 
   }

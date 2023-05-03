@@ -4,29 +4,29 @@
 @include mat.core();
 
 $my-primary-color: (
-    50 : #ebf1e7,
-    100 : #cedcc4,
-    200 : #aec59c,
-    300 : #8dae74,
-    400 : #749c57,
-    500 : #5c8b39,
-    600 : #548333,
-    700 : #4a782c,
-    800 : #416e24,
-    900 : #305b17,
-    A100 : #b9ff96,
-    A200 : #97ff63,
-    A400 : #75ff30,
-    A700 : #64ff17,
+    50 : #eff6e6,
+    100 : #d7e9c1,
+    200 : #bddb98,
+    300 : #a2cd6e,
+    400 : #8ec24f,
+    500 : #7ab730,
+    600 : #72b02b,
+    700 : #67a724,
+    800 : #5d9f1e,
+    900 : #4a9013,
+    A100 : #dbffc3,
+    A200 : #bdff90,
+    A400 : #9eff5d,
+    A700 : #8fff44,
     contrast: (
         50 : #000000,
         100 : #000000,
         200 : #000000,
         300 : #000000,
         400 : #000000,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
         800 : #ffffff,
         900 : #ffffff,
         A100 : #000000,
@@ -37,20 +37,20 @@ $my-primary-color: (
 );
 
 $my-accent-color: (
-    50 : #f7eee7,
-    100 : #ecd5c3,
-    200 : #e0ba9b,
-    300 : #d39e72,
-    400 : #c98954,
-    500 : #c07436,
-    600 : #ba6c30,
-    700 : #b26129,
-    800 : #aa5722,
-    900 : #9c4416,
-    A100 : #ffdfd0,
-    A200 : #ffbb9d,
-    A400 : #ff986a,
-    A700 : #ff8651,
+    50 : #fffae8,
+    100 : #fff2c5,
+    200 : #ffe99e,
+    300 : #ffe077,
+    400 : #ffda59,
+    500 : #ffd33c,
+    600 : #ffce36,
+    700 : #ffc82e,
+    800 : #ffc227,
+    900 : #ffb71a,
+    A100 : #ffffff,
+    A200 : #fffffe,
+    A400 : #ffeecb,
+    A700 : #ffe5b2,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -58,10 +58,10 @@ $my-accent-color: (
         300 : #000000,
         400 : #000000,
         500 : #000000,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
         A100 : #000000,
         A200 : #000000,
         A400 : #000000,
@@ -118,6 +118,16 @@ $my-theme: mat.define-light-theme((
 
 html, body { min-height: 100%; min-width: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+$primary: #7ab730;
+$secondary: #ffd33c;
+
+:root {
+    --primary: #7AB730;
+    --secondary: #FFD33C;
+    --light: #F3F3F3;
+    --dark: #212121;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
