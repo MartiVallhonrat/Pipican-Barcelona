@@ -2,9 +2,34 @@
     background: url("../../assets/hero-dog.jpg") top right no-repeat;
     background-size: cover;
 }
-.text-white-border{
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-}
 h1{
-    font-weight: 600;
+    font-weight: 700;
+}
+.img-container{
+    min-height: 500px;
+}
+.img-aboutus{
+    object-fit: cover;
+}
+.services-title{
+    max-width: 600px;
+}
+.service-item{
+    background-color: rgb(238, 238, 238);
+}
+.icon-image{
+    display: block;
+    max-height: 100px;
+    min-width: 100px;
+    height: auto;
+    width: auto;
+}
+h5{
+    font-weight: 650;
+}
+@media (max-width: 992px) {
+    .hero-header{
+        background:linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)), url("../../assets/hero-dog.jpg") top right no-repeat;
+        background-size: cover;
+    }
 }

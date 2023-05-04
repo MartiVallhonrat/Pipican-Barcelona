@@ -9,14 +9,14 @@
                     <mat-label>Your dog's name</mat-label>
                     <input type="text" matInput placeholder="Username" formControlName="Username">
                     <mat-error *ngIf="form.get('Username')?.errors && form.get('Username')?.hasError('required')">Dog name is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="form.get('Username')?.errors && form.get('Username')?.hasError('minlength')">Dog name <strong>minimum length is 4</strong></mat-error>
+                    <mat-error *ngIf="form.get('Username')?.errors && form.get('Username')?.hasError('minlength')">Dog name <strong>minimum length is 3</strong></mat-error>
                 </mat-form-field>
             
                 <mat-form-field>
                     <mat-label>Email</mat-label>
-                    <input type="Email" matInput placeholder="Email" formControlName="Email">
+                    <input type="email" matInput placeholder="Email" formControlName="Email">
                     <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('required')">Email is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('Email')">This <strong>email format </strong>is not correct</mat-error>
+                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('email')">This <strong>email format </strong>is not correct</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="pb-4">

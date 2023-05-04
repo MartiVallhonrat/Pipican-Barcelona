@@ -26,6 +26,4 @@ export class AppComponent implements OnInit {
         console.log(this.currentUser);  
       });
   }
-
-  //https://www.free-css.com/free-css-templates/page284/pet-shop
 }
