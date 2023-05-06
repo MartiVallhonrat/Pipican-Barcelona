@@ -6,10 +6,10 @@ export interface User {
     DogBreeed?: string | null;
 } 
 export interface UserFirebase {
-    Username: string | null;
-    Email: string | null;
-    Password: string | null;
+    Username: string;
+    Email: string;
+    Password: string;
     ProfileImage: string | null;
-    DogBreeed: string | null;
+    DogBreed: string | null;
     id: string;
 } 

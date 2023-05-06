@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   isLoggedIn: boolean = false; 
   userId: string | null = localStorage.getItem("id")
   currentUser?: UserFirebase;
+  urlImage: string = "../assets/profile-placeholder.jpg"
 
   constructor(private accountService: AccountManagmentService) { }
 
@@ -23,7 +24,9 @@ export class AppComponent implements OnInit {
     this.accountService.getItemById(this.userId)
       .subscribe(user => {
         this.currentUser = user;
-        console.log(this.currentUser);  
+        if(this.currentUser.ProfileImage !== null){
+          this.urlImage = this.currentUser.ProfileImage;
+        };  
       });
   }
 }

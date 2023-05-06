@@ -20,13 +20,12 @@ export class RegisterComponent {
   form = new FormGroup({
     Username: new FormControl("", [Validators.required, Validators.minLength(3)]),
     Email: new FormControl("", [Validators.required, Validators.email]),
-    Password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,10}$")]),
-    ProfileImage: new FormControl("https://firebasestorage.googleapis.com/v0/b/pipican-barcelona.appspot.com/o/images%2Fuser-defualt.png?alt=media&token=1235e277-175a-4c6f-a7d8-23fd2b04ff47"),
+    Password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{1,10}$")]),
+    ProfileImage: new FormControl(null),
     DogBreed: new FormControl(null)
   });
 
   onSubmit() {
-    debugger
     this.customError = false;
 
     if (this.form.invalid) {

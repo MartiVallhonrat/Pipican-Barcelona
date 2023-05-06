@@ -1,17 +1,66 @@
 <div class="container">
     <mat-card>
-        <mat-card-content>
-            <div class="d-flex align-items-center">
-                <div class="d-flex m-4">
-                    <img src="../../../assets/profile-placeholder.jpg"
-                    class="rounded-circle profilePic" alt="" />
+        <mat-card-content class="m-3">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div>
+                    <h4>Your dog's photo:</h4>
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex m-4">
+                            <img [src]="urlImage" class="rounded-circle profilePic" alt="Profile Pic"/>
+                        </div>
+                        <div class="btn btn-primary">
+                            <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                            <input type="file" class="form-control d-none" id="customFile2" (change)="onSelectFile($event)"/>
+                        </div> 
+                    </div>
                 </div>
-                <div class="btn btn-primary">
-                    <label class="form-label text-white m-1" for="customFile2">Choose file</label>
-                    <input type="file" class="form-control d-none" id="customFile2" />
-                </div> 
-            </div>
-            <hr class="m-3">
+                
+                <hr class="m-3">
+
+                <mat-form-field class="pt-4">
+                    <mat-label>Your dog's name</mat-label>
+                    <input id="Username" type="text" matInput placeholder="Username" formControlName="Username">
+                    <mat-error *ngIf="form.get('Username')?.errors && form.get('Username')?.hasError('required')">Dog name is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('Username')?.errors && form.get('Username')?.hasError('minlength')">Dog name <strong>minimum length is 3</strong></mat-error>
+                </mat-form-field>
+            
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" formControlName="Email">
+                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('required')">Email is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('email')">This <strong>email format </strong>is not correct</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="Password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('required')">Password is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('minlength')">Password <strong>minimum length is 6</strong></mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('maxlength')">Password <strong>maximum length is 10</strong></mat-error>
+                    <mat-error *ngIf="form.get('Password')?.errors && !form.get('Password')?.hasError('minlength') && !form.get('Password')?.hasError('maxlength') && form.get('Password')?.hasError('pattern')">Password has to have at least one character of each: <strong>upper case, lower case & digit</strong></mat-error>  
+                </mat-form-field>
+
+                <mat-form-field class="pb-4">
+                    <mat-label>Dog Breed</mat-label>
+                    <input type="text" matInput placeholder="Dog Breed" formControlName="DogBreed">
+                </mat-form-field>
+
+                <div *ngIf="this.customError">
+                    <p class="text-danger" >This <strong>email is alredy registred</strong> please choose another one.</p>
+                </div>
+
+                <hr class="m-3">
+
+                <div class="button pt-4">
+                    <button class="text-white" color="primary" type="submit" mat-flat-button>Update Account</button>
+                    <button class="text-white" color="warn" (click)="logout()" mat-flat-button><mat-icon>exit_to_app</mat-icon>Log Out</button>
+                </div>
+
+            </form>
         </mat-card-content>
     </mat-card>
 </div>

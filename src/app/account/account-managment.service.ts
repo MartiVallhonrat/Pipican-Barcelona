@@ -3,6 +3,7 @@ import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,10 @@ export class AccountManagmentService {
     const userRef = collection(this.firestore, "users");
     const emailQuery = query(userRef, where("Email", "==", email));
     return await getDocs(emailQuery);
+  }
+
+  updateUser(user: UserFirebase) {
+    const userDocRef = doc(this.firestore, `users/${user.id}`);
+    return updateDoc(userDocRef, {...user});
   }
 }
