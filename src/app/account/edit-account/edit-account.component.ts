@@ -53,8 +53,6 @@ export class EditAccountComponent {
   }
 
   async onSelectFile(e: any){
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
     if(e.target.files){
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
