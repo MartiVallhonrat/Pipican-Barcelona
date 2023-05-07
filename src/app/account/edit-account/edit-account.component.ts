@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { UserFirebase } from '../account-interfaces/account.interface';
 import { AccountManagmentService } from '../account-managment.service';
-import { Storage, ref, getDownloadURL, getStorage } from '@angular/fire/storage';
-import { uploadBytes } from 'firebase/storage';
+import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
+import { uploadBytes, deleteObject } from 'firebase/storage';
+import { ConfimationDialogComponent } from './confimation-dialog/confimation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-account',
@@ -20,7 +22,8 @@ export class EditAccountComponent {
 
   constructor(private accountService: AccountManagmentService,
               private fb: FormBuilder,
-              private storage: Storage) { }
+              private storage: Storage,
+              private dialog: MatDialog) { }
 
   form = new FormGroup({
     ProfileImage: new FormControl(""),
@@ -60,18 +63,14 @@ export class EditAccountComponent {
       }
 
       const file = e.target.files[0];
-      const imgRef = ref(this.storage, `images/${file.name}`)
+      await deleteObject(ref(this.storage, `images/${this.userId}`));
+      const imgRef = ref(this.storage, `images/${this.userId}/${file.name}`);
       await uploadBytes(imgRef, file);
       getDownloadURL(imgRef)
         .then((url) => {
           this.form.value.ProfileImage = url;
         })
     }
-  }
-
-  logout(){
-    localStorage.removeItem("id");
-    window.location.reload();
   }
 
   onSubmit() {
@@ -95,5 +94,22 @@ export class EditAccountComponent {
       .catch(error => {
         console.log("Error getting documents: ", error);
       }); 
+  }
+
+  logout() {
+    localStorage.removeItem("id");
+    window.location.reload();
+  }
+
+  openDialog(): void {
+    this.dialog
+      .open(ConfimationDialogComponent)
+      .afterClosed()
+      .subscribe((confirmation: Boolean) => {
+        if (confirmation) {
+          this.accountService.deleteUser(this.userId);
+          deleteObject(ref(this.storage, `images/${this.userId}`));
+        };
+      });
   }
 }

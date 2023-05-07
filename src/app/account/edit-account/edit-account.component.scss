@@ -29,5 +29,9 @@ form {
 }
 .button{
     display: inline-flex;
+}
+.danger-buttons{
+    justify-self: end;
+    display: inline-flex;
     gap: 20px;
 }

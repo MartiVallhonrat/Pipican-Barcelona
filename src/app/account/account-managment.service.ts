@@ -3,7 +3,7 @@ import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { updateDoc } from 'firebase/firestore';
+import { deleteDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,10 @@ export class AccountManagmentService {
   updateUser(user: UserFirebase) {
     const userDocRef = doc(this.firestore, `users/${user.id}`);
     return updateDoc(userDocRef, {...user});
+  }
+
+  deleteUser(id: string) {
+    const userDocRef = doc(this.firestore, `users/${id}`);
+    return deleteDoc(userDocRef);
   }
 }

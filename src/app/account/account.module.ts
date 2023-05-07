@@ -9,6 +9,7 @@ import { AccountRoutingModule } from './account-routing/account-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { ConfimationDialogComponent } from './edit-account/confimation-dialog/confimation-dialog.component';
 
 
 
@@ -16,7 +17,8 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    ConfimationDialogComponent
   ],
   imports: [
     CommonModule,
