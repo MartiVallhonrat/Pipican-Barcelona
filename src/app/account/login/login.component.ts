@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountManagmentService } from '../account-managment.service';
 import { UserFirebase } from '../account-interfaces/account.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent {
   notMatchingPassword?: boolean = false;
 
 
-  constructor(private accountService: AccountManagmentService) { }
+  constructor(private accountService: AccountManagmentService,
+              private router: Router) { }
 
   form = new FormGroup({
     Email: new FormControl("", [Validators.required]),
@@ -45,7 +47,8 @@ export class LoginComponent {
         };
 
         localStorage.setItem("id", foundUser.id);
-        window.location.replace("");
+        this.accountService.userIdSubject.next(foundUser.id);
+        this.router.navigate([""]);
       });
   }
 }

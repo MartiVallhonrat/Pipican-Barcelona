@@ -6,6 +6,7 @@ import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { uploadBytes, deleteObject } from 'firebase/storage';
 import { ConfimationDialogComponent } from './confimation-dialog/confimation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-account',
@@ -16,14 +17,16 @@ export class EditAccountComponent {
 
   hide:boolean = true;
   userId: string = localStorage.getItem("id")!;
-  currentUser!: UserFirebase;
+  currentUser?: UserFirebase;
   urlImage: string = "../../../assets/profile-placeholder.jpg";
   customError?: boolean;
 
   constructor(private accountService: AccountManagmentService,
               private fb: FormBuilder,
               private storage: Storage,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private router: Router
+              ) { }
 
   form = new FormGroup({
     ProfileImage: new FormControl(""),
@@ -38,6 +41,7 @@ export class EditAccountComponent {
     this.accountService.getItemById(this.userId)
       .subscribe(user => {
         this.currentUser = user;
+        console.log(this.currentUser);
         if(this.currentUser.ProfileImage !== null){
           this.urlImage = this.currentUser.ProfileImage;
         }; 
@@ -95,8 +99,7 @@ export class EditAccountComponent {
   }
 
   logout() {
-    localStorage.removeItem("id");
-    window.location.reload();
+    this.accountService.logout();
   }
 
   openDialog(): void {
@@ -106,7 +109,6 @@ export class EditAccountComponent {
       .subscribe((confirmation: Boolean) => {
         if (confirmation) {
           this.accountService.deleteUser(this.userId);
-          deleteObject(ref(this.storage, `images/${this.userId}`));
         };
       });
   }

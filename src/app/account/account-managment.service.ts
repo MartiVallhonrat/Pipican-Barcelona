@@ -1,20 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountManagmentService {
 
-  constructor(private firestore: Firestore) { }
+  public userIdSubject: BehaviorSubject<string | null>;
+  public userId: Observable<string | null>;
+
+  constructor
+  (private firestore: Firestore,
+    private router: Router
+    ) {
+      this.userIdSubject = new BehaviorSubject(localStorage.getItem("id"))
+      this.userId = this.userIdSubject.asObservable();
+    }
 
   addUser(user: User) {
     const userRef = collection(this.firestore, "users");
     return addDoc(userRef, user);
+  }
+
+  logout() {
+    localStorage.removeItem('id');
+    this.router.navigate(['/account']);
+    this.userIdSubject.next(null);
   }
 
   getUsers(): Observable<UserFirebase[]> {
@@ -38,8 +55,10 @@ export class AccountManagmentService {
     return updateDoc(userDocRef, {...user});
   }
 
-  deleteUser(id: string) {
+  async deleteUser(id: string) {
     const userDocRef = doc(this.firestore, `users/${id}`);
-    return deleteDoc(userDocRef);
+    await deleteDoc(userDocRef);
+    //deleteObject(ref(this.storage, `images/${this.userId}`));
+    await this.logout();
   }
 }

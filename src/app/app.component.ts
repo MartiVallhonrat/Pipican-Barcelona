@@ -11,14 +11,20 @@ import { UserFirebase } from './account/account-interfaces/account.interface';
 export class AppComponent implements OnInit {
   title = 'Pipican-Barcelona';
   isLoggedIn: boolean = false; 
-  userId: string | null = localStorage.getItem("id")
+  userId!: string | null;
   currentUser?: UserFirebase;
   urlImage: string = "../assets/profile-placeholder.jpg"
 
-  constructor(private accountService: AccountManagmentService) { }
+  constructor(private accountService: AccountManagmentService) {
+    this.accountService.userId.subscribe(x => {
+      this.userId = x;
+      this.ngOnInit();
+    });
+  }
 
   ngOnInit() {
-    if(this.userId === null) {
+    if(this.userId == null) {
+      this.currentUser = undefined;
       return;
     } 
     this.accountService.getItemById(this.userId)

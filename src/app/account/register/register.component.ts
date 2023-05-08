@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountManagmentService } from '../account-managment.service';
-import { User } from '../account-interfaces/account.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,6 +15,7 @@ export class RegisterComponent {
 
   constructor(
     private accountService: AccountManagmentService,
+    private router: Router
     ) {}
 
   form = new FormGroup({
@@ -37,7 +38,8 @@ export class RegisterComponent {
         if(snapshot.size === 0) {
           const addedUser = await this.accountService.addUser(this.form.value);
           localStorage.setItem("id", addedUser.id);
-          window.location.replace("");
+          this.accountService.userIdSubject.next(addedUser.id);
+          this.router.navigate([""]);
         } else {
           this.customError = true;
         }

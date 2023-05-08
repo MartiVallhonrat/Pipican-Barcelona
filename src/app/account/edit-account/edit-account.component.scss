@@ -28,10 +28,11 @@ form {
     flex-direction: column;
 }
 .button{
-    display: inline-flex;
+    display: flex;
+    justify-content: flex-end;
 }
 .danger-buttons{
-    justify-self: end;
-    display: inline-flex;
+    display: flex;
+    margin-left: auto;
     gap: 20px;
 }

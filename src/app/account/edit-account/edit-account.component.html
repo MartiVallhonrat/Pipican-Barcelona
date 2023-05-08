@@ -59,7 +59,7 @@
                     <button class="text-white" color="primary" type="submit" mat-flat-button>Update Account</button>
                     <div class="danger-buttons">
                         <button class="text-white" color="warn" (click)="logout()" mat-flat-button><mat-icon>exit_to_app</mat-icon>Log Out</button>
-                        <button class="text-white" color="warn" (click)="openDialog()" mat-flat-button><mat-icon>delete</mat-icon>>Delete Account</button>
+                        <button class="text-white" color="warn" (click)="$event.preventDefault(); openDialog()" mat-flat-button><mat-icon>delete</mat-icon>Delete Account</button>
                     </div>
                 </div>
 
