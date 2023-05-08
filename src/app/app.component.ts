@@ -30,6 +30,9 @@ export class AppComponent implements OnInit {
     this.accountService.getItemById(this.userId)
       .subscribe(user => {
         this.currentUser = user;
+        if(this.currentUser == undefined){
+          return;
+        }
         if(this.currentUser.ProfileImage !== null){
           this.urlImage = this.currentUser.ProfileImage;
         };  

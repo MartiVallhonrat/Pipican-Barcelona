@@ -3,7 +3,7 @@
         <mat-card-title class="h1 px-4 pt-3 pb-1" ><strong>LOGIN</strong></mat-card-title>
         <hr class="m-3">
         <mat-card-content>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form">
             
                 <mat-form-field class="pt-4">
                     <mat-label>Email</mat-label>
@@ -23,7 +23,7 @@
                 <p class="text-danger" *ngIf="notMatchingPassword">This <strong>password doesn't match with the email</strong> please try again.</p>
 
                 <div class="button">
-                    <button class="btn bg-primary text-white" color="primary" type="submit">Login</button>
+                    <button class="btn bg-primary text-white" (click)="onSubmit()" color="primary" type="submit">Login</button>
                 </div>
 
                 <div class="text-center pt-4">

@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { deleteObject } from 'firebase/storage';
+import { Storage, ref } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AccountManagmentService {
 
   constructor
   (private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private storage: Storage,
     ) {
       this.userIdSubject = new BehaviorSubject(localStorage.getItem("id"))
       this.userId = this.userIdSubject.asObservable();
@@ -55,10 +57,10 @@ export class AccountManagmentService {
     return updateDoc(userDocRef, {...user});
   }
 
-  async deleteUser(id: string) {
+  deleteUser(id: string) {
+    this.logout();
     const userDocRef = doc(this.firestore, `users/${id}`);
-    await deleteDoc(userDocRef);
-    //deleteObject(ref(this.storage, `images/${this.userId}`));
-    await this.logout();
+    deleteDoc(userDocRef);
+    //deleteObject(ref(this.storage, `images/${id}`));
   }
 }

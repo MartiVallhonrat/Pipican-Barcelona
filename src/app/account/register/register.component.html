@@ -3,7 +3,7 @@
         <mat-card-title class="h1 px-4 pt-3 pb-1" ><strong>REGISTER</strong></mat-card-title>
         <hr class="m-3">
         <mat-card-content>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form">
 
                 <mat-form-field class="pt-4">
                     <mat-label>Your dog's name</mat-label>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="button">
-                    <button class="text-white" color="primary" type="submit" mat-flat-button>Register</button>
+                    <button class="text-white" (click)="onSubmit()" color="primary" type="submit" mat-flat-button>Register</button>
                 </div>
 
                 <div class="text-center pt-4">

@@ -6,7 +6,6 @@ import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { uploadBytes, deleteObject } from 'firebase/storage';
 import { ConfimationDialogComponent } from './confimation-dialog/confimation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-account',
@@ -25,7 +24,6 @@ export class EditAccountComponent {
               private fb: FormBuilder,
               private storage: Storage,
               private dialog: MatDialog,
-              private router: Router
               ) { }
 
   form = new FormGroup({
@@ -41,7 +39,9 @@ export class EditAccountComponent {
     this.accountService.getItemById(this.userId)
       .subscribe(user => {
         this.currentUser = user;
-        console.log(this.currentUser);
+        if(this.currentUser == undefined){
+          return;
+        }
         if(this.currentUser.ProfileImage !== null){
           this.urlImage = this.currentUser.ProfileImage;
         }; 
@@ -65,7 +65,7 @@ export class EditAccountComponent {
       }
 
       const file = e.target.files[0];
-      await deleteObject(ref(this.storage, `images/${this.userId}`));
+      //await deleteObject(ref(this.storage, `images/${this.userId}`));
       const imgRef = ref(this.storage, `images/${this.userId}/${file.name}`);
       await uploadBytes(imgRef, file);
       getDownloadURL(imgRef)

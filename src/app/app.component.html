@@ -12,10 +12,8 @@
             <a routerLink="/home" class="nav-item nav-link" routerLinkActive="active-nav">Home</a>
             <a href="service.html" class="nav-item nav-link" routerLinkActive="active-nav">Pipicans</a>
             <a href="product.html" class="nav-item nav-link" routerLinkActive="active-nav">Friends</a>
-          </div>
-          <a routerLink="/about-us" class="nav-item nav-link" routerLinkActive="active-nav">About</a>
-          <a routerLink="/services" class="nav-item nav-link" routerLinkActive="active-nav">Services</a>
-          <a routerLink="/faqs" class="nav-item nav-link" routerLinkActive="active-nav">FAQS</a>
+            <a routerLink="/about-us" class="nav-item nav-link" routerLinkActive="active-nav">About</a>
+          </div>         
           <a *ngIf="currentUser == undefined" routerLink="/account" class="login-item nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5"><mat-icon class="mat-list-icon">account_circle</mat-icon><span>LOG IN</span></a>
           <a *ngIf="currentUser !== undefined" routerLink="/account/edit-account" class="login-item nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">
             <img class="rounded-circle profileImage" [src]="urlImage" alt="ProfilePic">
@@ -32,9 +30,7 @@
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/home" (click)="sidenav.toggle()">HOME</a>
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/start-page" (click)="sidenav.toggle()">PIPICANS</a>
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/offer" (click)="sidenav.toggle()">FRIENDS</a>
-        <a mat-list-item class="sidenav-item" routerLink="/about-us" (click)="sidenav.toggle()">ABOUT US</a>
-        <a mat-list-item class="sidenav-item" routerLink="/services" (click)="sidenav.toggle()">SERVICES</a>
-        <a mat-list-item class="sidenav-item" routerLink="/faqs" (click)="sidenav.toggle()">FAQS</a>
+        <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/about-us" (click)="sidenav.toggle()">ABOUT US</a>
         <a *ngIf="currentUser == undefined" routerLink="/account" class="login-item nav-link py-2 bg-primary text-white px-5 ms-lg-5" (click)="sidenav.toggle()">
           <mat-icon class="mat-list-icon">account_circle</mat-icon>
           <span>LOG IN</span>

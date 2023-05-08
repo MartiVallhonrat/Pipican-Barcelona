@@ -130,6 +130,9 @@ footer {
     footer {
         min-height: 170px;
     }
+    mat-sidenav {
+        display: none;
+    }
 }
 
 @media (max-width: 991.98px) {
