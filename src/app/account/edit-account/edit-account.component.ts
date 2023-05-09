@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { UserFirebase } from '../account-interfaces/account.interface';
 import { AccountManagmentService } from '../account-managment.service';
 import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
-import { uploadBytes, deleteObject } from 'firebase/storage';
+import { uploadBytes, listAll, deleteObject } from 'firebase/storage';
 import { ConfimationDialogComponent } from './confimation-dialog/confimation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -63,6 +63,17 @@ export class EditAccountComponent {
       reader.onload=(event:any) => {
         this.urlImage = event.target.result;
       }
+
+      const folderRef = ref(this.storage, `images/${this.userId}`)
+      await listAll(folderRef)
+      .then(file => {
+        if(file.items.length == 0) {
+          return;
+        }
+        file.items.forEach(itemRef => {
+          deleteObject(itemRef);
+        });
+      });
 
       const file = e.target.files[0];
       //await deleteObject(ref(this.storage, `images/${this.userId}`));

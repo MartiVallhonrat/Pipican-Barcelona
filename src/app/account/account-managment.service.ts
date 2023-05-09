@@ -5,7 +5,7 @@ import { UserFirebase } from './account-interfaces/account.interface';
 import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
-import { deleteObject } from 'firebase/storage';
+import { deleteObject, listAll } from 'firebase/storage';
 import { Storage, ref } from '@angular/fire/storage';
 
 @Injectable({
@@ -57,10 +57,20 @@ export class AccountManagmentService {
     return updateDoc(userDocRef, {...user});
   }
 
-  deleteUser(id: string) {
+  async deleteUser(id: string) {
     this.logout();
     const userDocRef = doc(this.firestore, `users/${id}`);
-    deleteDoc(userDocRef);
-    //deleteObject(ref(this.storage, `images/${id}`));
+    await deleteDoc(userDocRef);
+    
+    const folderRef = ref(this.storage, `images/${id}`)
+    await listAll(folderRef)
+      .then(file => {
+        if(file.items.length == 0) {
+          return;
+        }
+        file.items.forEach(itemRef => {
+          deleteObject(itemRef);
+        });
+      });
   }
 }

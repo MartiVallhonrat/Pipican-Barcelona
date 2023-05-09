@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const MaterialComponents = [
@@ -23,7 +24,8 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatCardModule,
   MatInputModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTabsModule
 ]
 
 

@@ -12,6 +12,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendsListComponent } from './friends/friends-list/friends-list.component';
+import { AddFriendComponent } from './friends/add-friend/add-friend.component';
 
 
 
@@ -19,7 +22,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
   declarations: [
     AppComponent,
     WelcomeComponent,
-    HomeComponent
+    HomeComponent,
+    FriendsComponent,
+    FriendsListComponent,
+    AddFriendComponent
   ],
   imports: [
     BrowserModule,

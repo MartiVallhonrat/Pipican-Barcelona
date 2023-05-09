@@ -21,7 +21,9 @@ mat-sidenav-container {
     min-width: 100%;
 }
 footer {
-    min-height: 150px;
+    display: flex;
+    height: 70px;
+    align-items: center;
 }
 .sidenav-links {
     display: flex;
@@ -126,9 +128,6 @@ footer {
         height: 1px;
         top: -1px;
         left: 0;
-    }
-    footer {
-        min-height: 170px;
     }
     mat-sidenav {
         display: none;
