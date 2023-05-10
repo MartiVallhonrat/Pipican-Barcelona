@@ -1,13 +1,13 @@
 <div class="container">
-    <div class="header-container">
+    <form [formGroup]="form" class="header-container">
         <mat-form-field class="searcher-container start-50">
             <mat-label>Name of your dog's friend</mat-label>
-            <input matInput title="searcher" type="text">
+            <input matInput title="searcher" type="text" formControlName="searcher" (click)="onSearch()">
             <button matSuffix mat-icon-button>
                 <mat-icon>search</mat-icon>
             </button>
         </mat-form-field>
-    </div>
+    </form>
     <mat-divider class="searcher-divider"></mat-divider>
     <mat-list>
         <div>
@@ -15,6 +15,10 @@
                 <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
                 <div matListItemTitle>"Estare aquí durante dos horas"</div>
                 <div matListItemLine>from:"Pepe"<span class="ps-3">in:"PipicanJoanMiro"</span></div>
+                <div matListItemLine><strong>HIIIII</strong></div>
+                <div matListItemLine>Hello</div>
+                <div matListItemMeta class="text-primary"> in:  </div>
+                <div matListItemMeta class="align-items-center text-primary pe-5 me-5"> from:  </div>
                 <div matListItemMeta class="text-primary"> 13:45 </div>
             </mat-list-item>
             <mat-divider></mat-divider>

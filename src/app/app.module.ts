@@ -16,6 +16,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 import { AddFriendComponent } from './friends/add-friend/add-friend.component';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -33,7 +34,7 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgbModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
