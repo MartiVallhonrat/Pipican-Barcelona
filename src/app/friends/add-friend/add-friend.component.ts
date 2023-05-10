@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-friend.component.scss']
 })
 export class AddFriendComponent {
-  inputValue?: Event | string;
+  
 }

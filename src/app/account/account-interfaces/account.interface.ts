@@ -3,7 +3,7 @@ export interface User {
     Email?: string | null;
     Password?: string | null;
     ProfileImage?: string | null;
-    DogBreeed?: string | null;
+    DogBreed?: string | null;
 } 
 export interface UserFirebase {
     Username: string;
@@ -12,4 +12,4 @@ export interface UserFirebase {
     ProfileImage: string | null;
     DogBreed: string | null;
     id: string;
-} 
+}

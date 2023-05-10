@@ -15,6 +15,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FriendsComponent } from './friends/friends.component';
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 import { AddFriendComponent } from './friends/add-friend/add-friend.component';
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 
 
 
@@ -35,7 +36,8 @@ import { AddFriendComponent } from './friends/add-friend/add-friend.component';
     NgbModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideMessaging(() => getMessaging())
   ],
   providers: [],
   bootstrap: [AppComponent]
