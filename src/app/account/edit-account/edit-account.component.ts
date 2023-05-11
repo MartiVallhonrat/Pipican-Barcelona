@@ -75,6 +75,7 @@ export class EditAccountComponent {
         });
       });
 
+      debugger
       const file = e.target.files[0];
       //await deleteObject(ref(this.storage, `images/${this.userId}`));
       const imgRef = ref(this.storage, `images/${this.userId}/${file.name}`);

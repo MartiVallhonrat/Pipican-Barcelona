@@ -2,182 +2,26 @@
     <form [formGroup]="form" class="header-container">
         <mat-form-field class="searcher-container start-50">
             <mat-label>Name of your dog's friend</mat-label>
-            <input matInput title="searcher" type="text" formControlName="searcher" (click)="onSearch()">
-            <button matSuffix mat-icon-button>
+            <input matInput title="searcher" type="text" formControlName="searcher">
+            <button matSuffix mat-icon-button (click)="onSearch()">
                 <mat-icon>search</mat-icon>
             </button>
         </mat-form-field>
     </form>
     <mat-divider class="searcher-divider"></mat-divider>
     <mat-list>
-        <div>
+        <div *ngFor="let user of searchedUsers">
             <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle>"Estare aquí durante dos horas"</div>
-                <div matListItemLine>from:"Pepe"<span class="ps-3">in:"PipicanJoanMiro"</span></div>
-                <div matListItemLine><strong>HIIIII</strong></div>
-                <div matListItemLine>Hello</div>
-                <div matListItemMeta class="text-primary"> in:  </div>
-                <div matListItemMeta class="align-items-center text-primary pe-5 me-5"> from:  </div>
-                <div matListItemMeta class="text-primary"> 13:45 </div>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
+                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="">
+                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="">
+                <div matListItemTitle>{{user.Username}}</div>
+                <div matListItemLine >{{user.DogBreed}}</div>
                 <button matListItemMeta mat-icon-button>
                     <mat-icon color="primary">person_add</mat-icon>
                 </button>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">person_add</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        
     </mat-list>
 </div>
 

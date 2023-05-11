@@ -19,6 +19,9 @@ export class AppComponent implements OnInit {
     this.accountService.userId.subscribe(x => {
       this.userId = x;
       this.ngOnInit();
+      if(x == null) {
+        this.urlImage = "../assets/profile-placeholder.jpg";
+      }
     });
   }
 

@@ -17,6 +17,7 @@ import { FriendsListComponent } from './friends/friends-list/friends-list.compon
 import { AddFriendComponent } from './friends/add-friend/add-friend.component';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     FriendsComponent,
     FriendsListComponent,
-    AddFriendComponent
+    AddFriendComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

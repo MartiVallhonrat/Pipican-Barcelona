@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
-import { Firestore, addDoc, collection, collectionData, docData, doc, where, query, getDocs, QuerySnapshot, and } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, and, docData } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { deleteDoc, updateDoc } from 'firebase/firestore';
+import { DocumentData, DocumentSnapshot, deleteDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, listAll } from 'firebase/storage';
 import { Storage, ref } from '@angular/fire/storage';
 
@@ -51,10 +51,18 @@ export class AccountManagmentService {
     const emailQuery = query(userRef, where("Email", "==", email));
     return await getDocs(emailQuery);
   }
-  async getUserByUsername(username: string, id: string): Promise<QuerySnapshot> {
+  async getUserByUsername(username: string, id: string): Promise<User[]> {
+    let result: User[] = []
     const userRef = collection(this.firestore, "users");
-    const usersQuery = query(userRef, and(where("Username", "==", username), where("id", "!=", id)));
-    return await getDocs(usersQuery);
+    const usersQuery = query(userRef, where("Username", "==", username));
+    const querySnapshot = await getDocs(usersQuery);
+    await querySnapshot.forEach(doc => {
+      if(doc.id == id) {
+        return;
+      }
+      result.push(doc.data())
+    })
+    return result;
   }
 
   updateUser(user: UserFirebase) {

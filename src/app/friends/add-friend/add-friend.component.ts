@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
-import { UserFirebase } from 'src/app/account/account-interfaces/account.interface';
+import { User } from 'src/app/account/account-interfaces/account.interface';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AddFriendComponent {
 
+  searchedUsers?: User[];
   userId = localStorage.getItem("id");
   form = new FormGroup({
     searcher: new FormControl("")
@@ -23,6 +24,6 @@ export class AddFriendComponent {
     }
 
     this.accountService.getUserByUsername(this.form.value.searcher, this.userId!)
-      .then(response => console.log(response));
+      .then(users => this.searchedUsers = users);
   }
 }

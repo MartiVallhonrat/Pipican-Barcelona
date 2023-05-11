@@ -20,10 +20,8 @@ mat-sidenav-container {
     width: 100%;
     min-width: 100%;
 }
-footer {
-    display: flex;
-    height: 70px;
-    align-items: center;
+router-outlet {
+    max-height: calc(100% - 200px);
 }
 .sidenav-links {
     display: flex;

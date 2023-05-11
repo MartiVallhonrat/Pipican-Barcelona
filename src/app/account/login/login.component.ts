@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   hide:boolean = true;
-  notFoundUser?: boolean = false;
-  notMatchingPassword?: boolean = false;
+  customError: boolean = false;
 
 
   constructor(private accountService: AccountManagmentService,
@@ -25,31 +24,25 @@ export class LoginComponent {
   });
 
   onSubmit() {
-    this.notFoundUser = false;
-    this.notMatchingPassword = false;
+    this.customError = false
 
     if (this.form.invalid) {
       return;
     }; 
 
-    this.accountService.getUsers() 
-      .subscribe(users => {
-        const foundUser = users.find((user: UserFirebase) => user.Email == this.form.value.Email);
-        if(foundUser == undefined) {
-          this.notFoundUser= true;
-          return;
-        };
-
-        const matchPassword = foundUser.Password == this.form.value.Password
-        if(matchPassword == false) {
-          this.notMatchingPassword= true;
-          return;
-        };
-
-        localStorage.setItem("id", foundUser.id);
-        this.accountService.userIdSubject.next(foundUser.id);
-        this.router.navigate([""]);
-      });
+    this.accountService.getUserByEmail(this.form.value.Email!)
+      .then(async snapshot => {
+        debugger
+        if(snapshot.size === 0) {
+          this.customError = true;
+        }
+        if(snapshot.size === 1) {
+          this.customError = true;
+        }
+      })
+      .catch(error => {
+        console.log("Error getting documents: ", error);
+      }); 
   }
 }
 
