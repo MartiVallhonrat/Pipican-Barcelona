@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
-import { User } from 'src/app/account/account-interfaces/account.interface';
+import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AddFriendComponent {
 
-  searchedUsers?: User[];
+  searchedUsers?: UserFirebase[];
   userId = localStorage.getItem("id");
   form = new FormGroup({
     searcher: new FormControl("")

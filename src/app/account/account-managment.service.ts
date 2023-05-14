@@ -51,16 +51,16 @@ export class AccountManagmentService {
     const emailQuery = query(userRef, where("Email", "==", email));
     return await getDocs(emailQuery);
   }
-  async getUserByUsername(username: string, id: string): Promise<User[]> {
-    let result: User[] = []
+  async getUserByUsername(username: string, id: string): Promise<UserFirebase[]> {
+    let result: any[] = []
     const userRef = collection(this.firestore, "users");
     const usersQuery = query(userRef, where("Username", "==", username));
-    const querySnapshot = await getDocs(usersQuery);
-    await querySnapshot.forEach(doc => {
+    const usersQuerySnapshot = await getDocs(usersQuery);
+    await usersQuerySnapshot.forEach(doc => {
       if(doc.id == id) {
         return;
       }
-      result.push(doc.data())
+      result.push({ id: doc.id, ...doc.data()});
     })
     return result;
   }

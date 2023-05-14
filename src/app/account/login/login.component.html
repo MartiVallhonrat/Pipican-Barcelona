@@ -10,6 +10,7 @@
                     <input type="Email" matInput placeholder="Email" formControlName="Email">
                     <mat-error *ngIf="form.get('Email')?.errors && form.get('Email')?.hasError('required')">Email is <strong>required</strong></mat-error>
                 </mat-form-field>
+                <p class="text-danger" *ngIf="emailError">This <strong>email is not registred</strong>, please register first or try again</p>
             
                 <mat-form-field class="pb-4">
                     <mat-label>Password</mat-label>
@@ -19,7 +20,7 @@
                     </button>
                     <mat-error *ngIf="form.get('Password')?.errors && form.get('Password')?.hasError('required')">Password is <strong>required</strong></mat-error>
                 </mat-form-field>
-                <p class="text-danger" *ngIf="customError">This <strong>email is not registred</strong> or this <strong>password doesn't match with the email</strong> please try again.</p>
+                <p class="text-danger" *ngIf="passwordError">This <strong>password doesn't match with the email</strong>, please try again</p>
 
                 <div class="button">
                     <button class="btn bg-primary text-white" (click)="onSubmit()" color="primary" type="submit">Login</button>

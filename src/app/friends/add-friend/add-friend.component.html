@@ -16,6 +16,7 @@
                 <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="">
                 <div matListItemTitle>{{user.Username}}</div>
                 <div matListItemLine >{{user.DogBreed}}</div>
+                <div matListItemLine >{{user.id}}</div>
                 <button matListItemMeta mat-icon-button>
                     <mat-icon color="primary">person_add</mat-icon>
                 </button>

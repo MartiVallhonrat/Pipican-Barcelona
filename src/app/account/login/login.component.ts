@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   hide:boolean = true;
-  customError: boolean = false;
+  emailError: boolean = false;
+  passwordError: boolean = false;
 
 
   constructor(private accountService: AccountManagmentService,
@@ -24,21 +25,32 @@ export class LoginComponent {
   });
 
   onSubmit() {
-    this.customError = false
+    this.emailError = false;
+    this.passwordError = false;
 
     if (this.form.invalid) {
       return;
     }; 
 
     this.accountService.getUserByEmail(this.form.value.Email!)
-      .then(async snapshot => {
+      .then(snapshot => {
         debugger
         if(snapshot.size === 0) {
-          this.customError = true;
+          this.emailError = true;
+          return;
         }
-        if(snapshot.size === 1) {
-          this.customError = true;
-        }
+        snapshot.forEach(doc => {
+          const user = doc.data()
+          if(user['Password'] !== this.form.value.Password) {
+            this.passwordError = true;
+            return;
+          }
+
+          localStorage.setItem("id", user["id"]);
+          this.accountService.userIdSubject.next(user["id"]);
+          this.router.navigate([""]);
+        });
+        
       })
       .catch(error => {
         console.log("Error getting documents: ", error);
