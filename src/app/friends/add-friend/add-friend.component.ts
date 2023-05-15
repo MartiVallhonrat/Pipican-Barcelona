@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
+import { FriendsServiceService } from '../friend-service/friends-service.service';
 import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -16,7 +17,10 @@ export class AddFriendComponent {
     searcher: new FormControl("")
   });
 
-  constructor(private accountService: AccountManagmentService) { }
+  constructor(
+    private accountService: AccountManagmentService,
+    private friendService: FriendsServiceService
+    ) { }
 
   onSearch() {
     if(this.form.value.searcher == null) {
@@ -25,5 +29,9 @@ export class AddFriendComponent {
 
     this.accountService.getUserByUsername(this.form.value.searcher, this.userId!)
       .then(users => this.searchedUsers = users);
+  }
+
+  async addFriend(friendId: string) {
+    await this.friendService.addFriend(friendId);
   }
 }

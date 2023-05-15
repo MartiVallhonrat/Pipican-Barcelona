@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-friends',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent {
+
 
 }

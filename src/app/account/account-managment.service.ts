@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
-import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, and, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, docData } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { DocumentData, DocumentSnapshot, deleteDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, listAll } from 'firebase/storage';
 import { Storage, ref } from '@angular/fire/storage';
 
