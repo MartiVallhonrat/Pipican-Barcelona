@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Firestore, doc, updateDoc, arrayUnion, setDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
 import { collection, getDoc, onSnapshot } from 'firebase/firestore';
-import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { UserFirebase } from 'src/app/account/account-interfaces/account.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
