@@ -1,10 +1,11 @@
 <div class="container">
     <mat-list>
-        <div>
+        <div *ngFor="let user of friendsList">
             <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
+                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
+                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
+                <div matListItemTitle>{{user.Username}}</div>
+                <div matListItemLine >{{user.DogBreed}}</div>
                 <button matListItemMeta mat-icon-button>
                     <mat-icon>close</mat-icon>
                 </button>

@@ -12,8 +12,8 @@
     <mat-list>
         <div *ngFor="let user of searchedUsers">
             <mat-list-item>
-                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="">
-                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="">
+                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
+                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
                 <div matListItemTitle>{{user.Username}}</div>
                 <div matListItemLine >{{user.DogBreed}}</div>
                 <button matListItemMeta mat-icon-button (click)="addFriend(user.id)">

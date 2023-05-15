@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, updateDoc, arrayUnion, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, updateDoc, arrayUnion, setDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
-import { collection, getDoc } from 'firebase/firestore';
+import { collection, getDoc, onSnapshot } from 'firebase/firestore';
+import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,30 +18,40 @@ export class FriendsServiceService {
   ) { }
 
   async addFriend(friendId: string) {
-    debugger
     const friendListRef = doc(this.firestore, `friends/${this.userId}`);
     const friendListExists = (await getDoc(friendListRef)).exists();
 
     if(!friendListExists) {
       setDoc(friendListRef, {
-        fiendList: arrayUnion(friendId)
+        friendList: arrayUnion(friendId)
       });
     };
     if(friendListExists) {
       updateDoc(friendListRef, {
-        fiendList: arrayUnion(friendId)
+        friendList: arrayUnion(friendId)
       });
     };
   }
 
-  async getFriendList() {
+  getFriendList(): Observable<UserFirebase[]> {
     debugger
-    const usersFriendListRef = doc(this.firestore, `friends/${this.userId}`)
-    const userFriendListSnap = await getDoc(usersFriendListRef);
+    let result: UserFirebase[] = [];
+    
+    const friendsIdListRef = doc(this.firestore, `friends/${this.userId}`);
+    onSnapshot(friendsIdListRef, async (friendsIdListSnap) => {
+      if(friendsIdListSnap.exists()) {
+        debugger
+        const friendsIdList = friendsIdListSnap.get("friendList");
+        
+        const friendsList: any[] = [];
+        const usersRef = collection(this.firestore, "users");
+        const usersQuery = query(usersRef, where("id", "in", friendsIdList));
+        const usersQuerySnapshot = (await getDocs(usersQuery));
+        usersQuerySnapshot.forEach(doc => friendsList.push({ id: doc.id, ...doc.data() }))
+        result = friendsList;
+      } 
+    });
 
-    if(userFriendListSnap.exists()) {
-      const userFriends = userFriendListSnap.data();
-      console.log(userFriends["friendList"])
-    }
+    return result as unknown as Observable<UserFirebase[]>;
   }
 }
