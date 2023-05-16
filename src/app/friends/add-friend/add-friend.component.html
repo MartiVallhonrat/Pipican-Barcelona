@@ -2,8 +2,8 @@
     <form [formGroup]="form" class="header-container">
         <mat-form-field class="searcher-container start-50">
             <mat-label>Name of your dog's friend</mat-label>
-            <input matInput title="searcher" type="text" formControlName="searcher">
-            <button matSuffix mat-icon-button (click)="onSearch()">
+            <input matInput title="searcher" type="text" formControlName="searcher" (ngModelChange)="onSearch()">
+            <button matSuffix mat-icon-button>
                 <mat-icon>search</mat-icon>
             </button>
         </mat-form-field>
@@ -16,7 +16,7 @@
                 <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
                 <div matListItemTitle>{{user.Username}}</div>
                 <div matListItemLine >{{user.DogBreed}}</div>
-                <button matListItemMeta mat-icon-button (click)="addFriend(user.id)">
+                <button matListItemMeta mat-icon-button (click)="addRequest(user.id)">
                     <mat-icon color="primary">person_add</mat-icon>
                 </button>
             </mat-list-item>

@@ -1,56 +1,15 @@
 <div class="container">
     <mat-list>
-        <div>
+        <div *ngFor="let user of requestList">
             <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
+                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
+                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
+                <div matListItemTitle>{{user.Username}}</div>
+                <div matListItemLine >{{user.DogBreed}}</div>
+                <button matListItemMeta mat-icon-button (click)="acceptRequest(user.id)">
                     <mat-icon color="warn">close</mat-icon>
                 </button>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">check</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="warn">close</mat-icon>
-                </button>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">check</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="warn">close</mat-icon>
-                </button>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="primary">check</mat-icon>
-                </button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div>
-            <mat-list-item>
-                <img matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="../../../assets/profile-placeholder.jpg">
-                <div matListItemTitle >Pepe</div>
-                <div matListItemLine >Golden Terrier</div>
-                <button matListItemMeta mat-icon-button>
-                    <mat-icon color="warn">close</mat-icon>
-                </button>
-                <button matListItemMeta mat-icon-button>
+                <button matListItemMeta mat-icon-button (click)="rejectRequest(user.id)">
                     <mat-icon color="primary">check</mat-icon>
                 </button>
             </mat-list-item>

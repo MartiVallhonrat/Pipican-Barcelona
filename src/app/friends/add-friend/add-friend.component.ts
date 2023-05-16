@@ -23,15 +23,14 @@ export class AddFriendComponent {
     ) { }
 
   onSearch() {
-    if(this.form.value.searcher == null) {
+    if(this.form.value.searcher == null || undefined) {
       return;
-    }
-
+    };
     this.accountService.getUserByUsername(this.form.value.searcher, this.userId!)
       .then(users => this.searchedUsers = users);
   }
 
-  async addFriend(friendId: string) {
-    await this.friendService.addFriend(friendId);
+  async addRequest(friendId: string) {
+    await this.friendService.sendRequest(friendId);
   }
 }

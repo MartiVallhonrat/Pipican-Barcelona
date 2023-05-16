@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
-import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, docData, getDoc } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, listAll } from 'firebase/storage';
@@ -54,7 +54,9 @@ export class AccountManagmentService {
   async getUserByUsername(username: string, id: string): Promise<UserFirebase[]> {
     let result: any[] = []
     const userRef = collection(this.firestore, "users");
-    const usersQuery = query(userRef, where("Username", "==", username));
+    const friendIdListRef = doc(this.firestore, `friends/${this.userId}`);
+    const friendIdListData = (await getDoc(friendIdListRef)).get("friendList");
+    const usersQuery = query(userRef, where("Username", "==", username), where("id", "not-in", friendIdListData));
     const usersQuerySnapshot = await getDocs(usersQuery);
     await usersQuerySnapshot.forEach(doc => {
       if(doc.id == id) {

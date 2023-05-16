@@ -8,7 +8,6 @@ import { UserFirebase } from 'src/app/account/account-interfaces/account.interfa
   styleUrls: ['./friends-list.component.scss']
 })
 export class FriendsListComponent implements OnInit{
-  userId = localStorage.getItem("id");
   friendList: UserFirebase[] = [];
 
   constructor(
@@ -19,5 +18,9 @@ export class FriendsListComponent implements OnInit{
 
   ngOnInit(): void {
     this.friendService.getFriendList();
+  }
+
+  removeFriend(friendId: string) {
+    this.friendService.removeFriend(friendId);
   }
 }
