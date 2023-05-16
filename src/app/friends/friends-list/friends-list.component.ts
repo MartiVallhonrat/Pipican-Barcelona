@@ -9,14 +9,15 @@ import { UserFirebase } from 'src/app/account/account-interfaces/account.interfa
 })
 export class FriendsListComponent implements OnInit{
   userId = localStorage.getItem("id");
-  friendsList: UserFirebase[] = [];
+  friendList: UserFirebase[] = [];
 
   constructor(
     private friendService: FriendsServiceService
-  ) { }
+  ) {
+    this.friendService.friendList?.subscribe(x => {this.friendList = x; console.log(this.friendList)})
+  }
 
   ngOnInit(): void {
-    this.friendService.getFriendList()
-      .subscribe(friendArr => this.friendsList = friendArr);
+    this.friendService.getFriendList();
   }
 }

@@ -1,6 +1,6 @@
 <div class="container">
     <mat-list>
-        <div *ngFor="let user of friendsList">
+        <div *ngFor="let user of friendList">
             <mat-list-item>
                 <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
                 <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
