@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FriendsServiceService {
-
+  //https://www.positronx.io/create-angular-firebase-crud-app-with-angular-material/
   userId = localStorage.getItem("id");
   public friendListSubject?: BehaviorSubject<any[]>;
   public friendList?: Observable<UserFirebase[]>
@@ -25,14 +25,15 @@ export class FriendsServiceService {
     this.friendList = this.friendListSubject?.asObservable();
 
     this.requestListSubject = new BehaviorSubject<UserFirebase[]>([]);
-    this.requestList = this.friendListSubject?.asObservable();
+    this.requestList = this.requestListSubject?.asObservable();
   }
 
   async sendRequest(friendId: string) {
+    debugger
     const requestListRef = doc(this.firestore, `friends/${friendId}`);
     const requestListExists = (await getDoc(requestListRef)).exists();
 
-    if(!requestListExists) {
+    if(requestListExists == false) {
       setDoc(requestListRef, {
         requestList: arrayUnion(this.userId)
       });
@@ -77,14 +78,18 @@ export class FriendsServiceService {
   }
 
   async getRequestList() {
+    debugger
     const requestIdListRef = doc(this.firestore, `friends/${this.userId}`);
     const requestIdListData = (await getDoc(requestIdListRef)).get("requestList");
+    console.log("error2")
     if(requestIdListData !== undefined) {    
       const requestList: any[] = [];
       const usersRef = collection(this.firestore, "users");
       const usersQuery = query(usersRef, where("id", "in", requestIdListData));
+      console.log("error 2 fin")
       const usersQuerySnapshot = (await getDocs(usersQuery));
       usersQuerySnapshot.forEach(doc => requestList.push({ id: doc.id, ...doc.data() }))
+      console.log(requestList)
       this.requestListSubject?.next(requestList);
     }
     onSnapshot(requestIdListRef, async (requestIdListSnap) => {
@@ -103,6 +108,7 @@ export class FriendsServiceService {
   async getFriendList() {
     const friendsIdListRef = doc(this.firestore, `friends/${this.userId}`);
     const friendIdListData = (await getDoc(friendsIdListRef)).get("friendList");
+    console.log("error")
     if(friendIdListData !== undefined) {    
       const friendsList: any[] = [];
       const usersRef = collection(this.firestore, "users");

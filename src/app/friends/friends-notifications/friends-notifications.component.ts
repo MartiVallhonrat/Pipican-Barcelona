@@ -13,11 +13,12 @@ export class FriendsNotificationsComponent {
   constructor(
     private friendService: FriendsServiceService
   ) {
-    this.friendService.requestList?.subscribe(x => {this.requestList = x; console.log(this.requestList)})
+    
   }
 
   ngOnInit(): void {
     this.friendService.getRequestList();
+    this.friendService.requestList?.subscribe(x => {this.requestList = x; console.log(this.requestList)});
   }
 
   acceptRequest(friendId: string){

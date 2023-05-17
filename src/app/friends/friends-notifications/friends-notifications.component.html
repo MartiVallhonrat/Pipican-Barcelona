@@ -7,10 +7,10 @@
                 <div matListItemTitle>{{user.Username}}</div>
                 <div matListItemLine >{{user.DogBreed}}</div>
                 <button matListItemMeta mat-icon-button (click)="acceptRequest(user.id)">
-                    <mat-icon color="warn">close</mat-icon>
+                    <mat-icon color="primary">check</mat-icon>
                 </button>
                 <button matListItemMeta mat-icon-button (click)="rejectRequest(user.id)">
-                    <mat-icon color="primary">check</mat-icon>
+                    <mat-icon color="warn">close</mat-icon>
                 </button>
             </mat-list-item>
             <mat-divider></mat-divider>

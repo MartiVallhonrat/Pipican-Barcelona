@@ -51,12 +51,19 @@ export class AccountManagmentService {
     const emailQuery = query(userRef, where("Email", "==", email));
     return await getDocs(emailQuery);
   }
-  async getUserByUsername(username: string, id: string): Promise<UserFirebase[]> {
+  async getUserByUsername(username: string, id: string): Promise<UserFirebase[] | undefined> {
     let result: any[] = []
     const userRef = collection(this.firestore, "users");
     const friendIdListRef = doc(this.firestore, `friends/${this.userId}`);
     const friendIdListData = (await getDoc(friendIdListRef)).get("friendList");
-    const usersQuery = query(userRef, where("Username", "==", username), where("id", "not-in", friendIdListData));
+    console.log(friendIdListData)
+    let usersQuery
+    if(friendIdListData == undefined){
+      usersQuery = query(userRef, where("Username", "==", username));
+    } else {
+      usersQuery = query(userRef, where("Username", "==", username), where("id", "not-in", friendIdListData));
+    }
+
     const usersQuerySnapshot = await getDocs(usersQuery);
     await usersQuerySnapshot.forEach(doc => {
       if(doc.id == id) {
