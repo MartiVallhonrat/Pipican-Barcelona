@@ -12,9 +12,7 @@ export class FriendsNotificationsComponent {
 
   constructor(
     private friendService: FriendsServiceService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.friendService.getRequestList();

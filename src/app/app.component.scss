@@ -20,9 +20,6 @@ mat-sidenav-container {
     width: 100%;
     min-width: 100%;
 }
-router-outlet {
-    max-height: calc(100% - 200px);
-}
 .sidenav-links {
     display: flex;
     flex-direction: column;

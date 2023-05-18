@@ -1,6 +1,13 @@
 mat-tab-group {
     background-color: white;
+    height: 100%;
+}
+mat-tab {
+    height: 100%;
 }
 .tab-icon {
     margin-right: 8px;
+}
+mat-tab-body-content {
+    height: 100%;
 }

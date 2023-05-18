@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FriendsServiceService {
-  //https://www.positronx.io/create-angular-firebase-crud-app-with-angular-material/
+
   userId = localStorage.getItem("id");
   public friendListSubject?: BehaviorSubject<any[]>;
   public friendList?: Observable<UserFirebase[]>
@@ -26,6 +26,8 @@ export class FriendsServiceService {
 
     this.requestListSubject = new BehaviorSubject<UserFirebase[]>([]);
     this.requestList = this.requestListSubject?.asObservable();
+
+    this.accountService.userId.subscribe(x => this.userId = x)
   }
 
   async sendRequest(friendId: string) {
@@ -64,6 +66,11 @@ export class FriendsServiceService {
         friendList: arrayUnion(this.userId)
       });
     };
+    if(!senderFriendListExists) {
+      setDoc(senderFriendListRef, {
+        friendList: arrayUnion(this.userId)
+      });
+    }
   }
 
   async rejectFriend(friendId: string) {
@@ -78,55 +85,38 @@ export class FriendsServiceService {
   }
 
   async getRequestList() {
-    debugger
     const requestIdListRef = doc(this.firestore, `friends/${this.userId}`);
-    const requestIdListData = (await getDoc(requestIdListRef)).get("requestList");
-    console.log("error2")
-    if(requestIdListData !== undefined) {    
-      const requestList: any[] = [];
-      const usersRef = collection(this.firestore, "users");
-      const usersQuery = query(usersRef, where("id", "in", requestIdListData));
-      console.log("error 2 fin")
-      const usersQuerySnapshot = (await getDocs(usersQuery));
-      usersQuerySnapshot.forEach(doc => requestList.push({ id: doc.id, ...doc.data() }))
-      console.log(requestList)
-      this.requestListSubject?.next(requestList);
-    }
     onSnapshot(requestIdListRef, async (requestIdListSnap) => {
-      if(requestIdListSnap.exists()) {
-        const requestIdList = requestIdListSnap.get("requestList");
+      debugger
+      if(requestIdListSnap.exists() && requestIdListSnap.get("requestList") !== undefined && requestIdListSnap.get("requestList").length !== 0) {
+        const requestIdList = await requestIdListSnap.get("requestList");
         const requestList: any[] = [];
         const usersRef = collection(this.firestore, "users");
-        const usersQuery = query(usersRef, where("id", "in", requestIdList));
+        const usersQuery = await query(usersRef, where("id", "in", requestIdList));
         const usersQuerySnapshot = (await getDocs(usersQuery));
         usersQuerySnapshot.forEach(doc => requestList.push({ id: doc.id, ...doc.data() }))
         this.requestListSubject?.next(requestList);
-      } 
+      } else {
+        this.requestListSubject?.next([]);
+      }
     });
   }
 
   async getFriendList() {
     const friendsIdListRef = doc(this.firestore, `friends/${this.userId}`);
-    const friendIdListData = (await getDoc(friendsIdListRef)).get("friendList");
-    console.log("error")
-    if(friendIdListData !== undefined) {    
-      const friendsList: any[] = [];
-      const usersRef = collection(this.firestore, "users");
-      const usersQuery = query(usersRef, where("id", "in", friendIdListData));
-      const usersQuerySnapshot = (await getDocs(usersQuery));
-      usersQuerySnapshot.forEach(doc => friendsList.push({ id: doc.id, ...doc.data() }))
-      this.friendListSubject?.next(friendsList);
-    }
     onSnapshot(friendsIdListRef, async (friendsIdListSnap) => {
-      if(friendsIdListSnap.exists()) {
-        const friendsIdList = friendsIdListSnap.get("friendList");
+      debugger
+      if(friendsIdListSnap.exists() && friendsIdListSnap.get("friendList") !== undefined && friendsIdListSnap.get("friendList").length !== 0) {
+        const friendsIdList = await friendsIdListSnap.get("friendList");
         const friendsList: any[] = [];
         const usersRef = collection(this.firestore, "users");
-        const usersQuery = query(usersRef, where("id", "in", friendsIdList));
+        const usersQuery = await query(usersRef, where("id", "in", friendsIdList));
         const usersQuerySnapshot = (await getDocs(usersQuery));
         usersQuerySnapshot.forEach(doc => friendsList.push({ id: doc.id, ...doc.data() }))
         this.friendListSubject?.next(friendsList);
-      } 
+      } else {
+        this.friendListSubject?.next([]);
+      }
     });
   }
 

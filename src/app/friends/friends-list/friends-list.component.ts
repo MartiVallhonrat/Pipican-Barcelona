@@ -12,12 +12,11 @@ export class FriendsListComponent implements OnInit{
 
   constructor(
     private friendService: FriendsServiceService
-  ) {
-    this.friendService.friendList?.subscribe(x => {this.friendList = x; console.log(this.friendList)})
-  }
+  ) {}
 
   ngOnInit(): void {
     this.friendService.getFriendList();
+    this.friendService.friendList?.subscribe(x => {this.friendList = x; console.log(this.friendList)})
   }
 
   removeFriend(friendId: string) {
