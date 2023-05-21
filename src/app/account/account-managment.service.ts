@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './account-interfaces/account.interface';
 import { UserFirebase } from './account-interfaces/account.interface';
-import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, docData, getDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, where, query, getDocs, QuerySnapshot, docData, getDoc, arrayRemove } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, listAll } from 'firebase/storage';
@@ -54,18 +54,20 @@ export class AccountManagmentService {
   async getUserByUsername(username: string, id: string): Promise<UserFirebase[] | undefined> {
     let result: any[] = []
     const userRef = collection(this.firestore, "users");
-    const friendIdListRef = doc(this.firestore, `friends/${this.userId}`);
-    const friendIdListData = (await getDoc(friendIdListRef)).get("friendList");
-    console.log(friendIdListData)
+    let userid;
+    this.userId.subscribe(x => userid = x)
+    const friendIdListRef = doc(this.firestore, `friends/${userid}`);
+    const friendIdListDataSnap = await getDoc(friendIdListRef);
     let usersQuery
-    if(friendIdListData == undefined){
-      usersQuery = query(userRef, where("Username", "==", username));
-    } else {
+    if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("requestList") !== undefined && friendIdListDataSnap.get("requestList").length !== 0){
+      const friendIdListData = await friendIdListDataSnap.get("friendList");
       usersQuery = query(userRef, where("Username", "==", username), where("id", "not-in", friendIdListData));
+    } else {
+      usersQuery = query(userRef, where("Username", "==", username));
     }
 
     const usersQuerySnapshot = await getDocs(usersQuery);
-    await usersQuerySnapshot.forEach(doc => {
+    usersQuerySnapshot.forEach(doc => {
       if(doc.id == id) {
         return;
       }
@@ -80,7 +82,24 @@ export class AccountManagmentService {
   }
 
   async deleteUser(id: string) {
+
     this.logout();
+    debugger
+    const friendIdListRef = doc(this.firestore, `friends/${id}`);
+    const friendIdListDataSnap = await getDoc(friendIdListRef);
+    console.log(friendIdListDataSnap.exists(), friendIdListDataSnap.get("friendList"))
+    if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0){
+      const friendIdListData = await friendIdListDataSnap.get("friendList");
+      friendIdListData.forEach((friendId: string) => {
+        debugger
+        const friendRef = doc(this.firestore, `friends/${friendId}`);
+        updateDoc(friendRef, {
+          friendList: arrayRemove(id)
+        });
+      });
+    }
+    await deleteDoc(friendIdListRef);
+
     const userDocRef = doc(this.firestore, `users/${id}`);
     await deleteDoc(userDocRef);
     

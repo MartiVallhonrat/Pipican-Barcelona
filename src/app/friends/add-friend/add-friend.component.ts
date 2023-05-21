@@ -23,7 +23,7 @@ export class AddFriendComponent {
     ) { }
 
   onSearch() {
-    if(this.form.value.searcher == null || undefined) {
+    if(this.form.value.searcher == (null || undefined) || this.form.value.searcher.length < 3) {
       return;
     };
     this.accountService.getUserByUsername(this.form.value.searcher, this.userId!)

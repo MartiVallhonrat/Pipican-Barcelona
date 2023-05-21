@@ -1,21 +1,36 @@
-<div> 
-  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+<div>
+  <nav *ngIf="currentUser == undefined" class="navbar-start">
+    <a href="index.html" class="navbar-brand ms-lg-5 py-0 px-4 d-flex align-items-center">
+      <div class="logo">
+        <img class="header-img" src="../assets/logo.png" alt="logo">
+      </div>
+      <div class="letters-start">
+        <img class="header-img" src="../assets/PipicansBarcelonaLetters.PNG" alt="">
+      </div>
+    </a>
+    <a routerLink="/account" class="login-start login-item nav-item nav-link nav-contact bg-primary text-white px-5 py-lg-5"><mat-icon class="mat-list-icon">account_circle</mat-icon><span class="fw-bold">LOG IN</span></a>
+  </nav> 
+  <nav *ngIf="currentUser !== undefined" class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-0 px-3 px-lg-0">
     <button mat-icon-button class="example-icon" (click)="sidenav.toggle()" title="navbar-toggler" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span><mat-icon>menu</mat-icon></span>
     </button>
-    <a href="index.html" class="navbar-brand ms-lg-5">
-        <h1 class="m-0 text-uppercase text-dark">Pet Shop</h1>
+    <a href="index.html" class="navbar-brand ms-lg-5 py-0 d-flex align-items-center">
+      <div class="logo">
+        <img class="header-img" src="../assets/logo.png" alt="logo">
+      </div>
+      <div class="letters">
+        <img class="header-img" src="../assets/PipicansBarcelonaLetters.PNG" alt="">
+      </div>
     </a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-          <div *ngIf="userId" class="d-flex">
+          <div class="d-flex">
             <a routerLink="/home" class="nav-item nav-link" routerLinkActive="active-nav">Home</a>
             <a href="service.html" class="nav-item nav-link" routerLinkActive="active-nav">Pipicans</a>
             <a routerLink="/friends" class="nav-item nav-link" routerLinkActive="active-nav">Friends</a>
             <a routerLink="/about-us" class="nav-item nav-link" routerLinkActive="active-nav">About</a>
           </div>         
-          <a *ngIf="currentUser == undefined" routerLink="/account" class="login-item nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5"><mat-icon class="mat-list-icon">account_circle</mat-icon><span>LOG IN</span></a>
-          <a *ngIf="currentUser !== undefined" routerLink="/account/edit-account" class="login-item nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">
+          <a routerLink="/account/edit-account" class="login-item nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">
             <img class="rounded-circle profileImage" [src]="urlImage" alt="ProfilePic">
             <span class="text-uppercase fw-bold">{{currentUser.Username}}</span>
           </a>
@@ -35,7 +50,7 @@
           <mat-icon class="mat-list-icon">account_circle</mat-icon>
           <span>LOG IN</span>
         </a>
-        <a *ngIf="currentUser !== undefined" routerLink="/account/edit-account" class="login-item nav-link bg-primary text-white py-2 ms-lg-5" (click)="sidenav.toggle()">
+        <a *ngIf="currentUser !== undefined" routerLink="/account/edit-account" class="login-item nav-link bg-primary text-white p-2 ms-lg-5" (click)="sidenav.toggle()">
           <img class="rounded-circle profileImage" [src]="urlImage" alt="ProfilePic">
           <span class="text-uppercase fw-bold">{{currentUser.Username}}</span>
         </a>

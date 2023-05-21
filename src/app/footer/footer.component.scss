@@ -4,5 +4,10 @@ footer {
     align-items: center;
 }
 p {
-    font-size: 12px;
+    font-size: 14px;
+}
+@media (min-width: 992px) {
+    p {
+        font-size: 18px;
+    }
 }

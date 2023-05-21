@@ -38,7 +38,10 @@ export class AppComponent implements OnInit {
         }
         if(this.currentUser.ProfileImage !== null){
           this.urlImage = this.currentUser.ProfileImage;
+        } else {
+          this.urlImage = "../assets/profile-placeholder.jpg";
         };  
+
       });
   }
 }
