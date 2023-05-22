@@ -9,3 +9,12 @@ mat-tab {
 .tab-icon {
     margin-right: 8px;
 }
+.tab-title {
+    display: none;
+}
+
+@media (min-width: 542px) {
+    .tab-title {
+        display: block;
+    }
+}  

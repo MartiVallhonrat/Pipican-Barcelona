@@ -2,6 +2,7 @@
     height: 90px;
 }
 .navbar-start {
+    min-height: 100px;
     display: flex;
     justify-content: flex-end;
     gap: auto;
@@ -9,6 +10,8 @@
 .login-start{
     margin-left: auto;
     max-width: 200px;
+    font-size: large;
+    font-weight: 700;
 }
 .letters {
     display: none;
@@ -156,6 +159,8 @@ mat-sidenav-container {
     .login-start{
         margin-left: auto;
         max-width: 200px;
+        font-size: large;
+        font-weight: 700;
     }
     .letters {
         display: none;
@@ -182,5 +187,15 @@ mat-sidenav-container {
         display: block;
     }
 }
+
+@media (max-width: 400px) {
+    .login-start{
+        margin-left: auto;
+        width: 50%;
+        font-size: large;
+        font-weight: 700;
+    }
+}
+
 
 

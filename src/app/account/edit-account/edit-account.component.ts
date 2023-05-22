@@ -57,6 +57,7 @@ export class EditAccountComponent {
   }
 
   async onSelectFile(e: any){
+    debugger
     if(e.target.files){
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
@@ -67,7 +68,7 @@ export class EditAccountComponent {
       const folderRef = ref(this.storage, `images/${this.userId}`)
       await listAll(folderRef)
       .then(file => {
-        if(file.items.length == 0) {
+        if(file == undefined || file.items.length == 0) {
           return;
         }
         file.items.forEach(itemRef => {
@@ -77,10 +78,9 @@ export class EditAccountComponent {
 
       debugger
       const file = e.target.files[0];
-      //await deleteObject(ref(this.storage, `images/${this.userId}`));
       const imgRef = ref(this.storage, `images/${this.userId}/${file.name}`);
       await uploadBytes(imgRef, file);
-      getDownloadURL(imgRef)
+      await getDownloadURL(imgRef)
         .then((url) => {
           this.form.value.ProfileImage = url;
         })
