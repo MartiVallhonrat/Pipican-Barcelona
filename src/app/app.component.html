@@ -26,7 +26,7 @@
         <div class="navbar-nav ms-auto py-0">
           <div class="d-flex">
             <a routerLink="/home" class="nav-item nav-link" routerLinkActive="active-nav">Home</a>
-            <a href="service.html" class="nav-item nav-link" routerLinkActive="active-nav">Pipicans</a>
+            <a routerLink="/pipicans" class="nav-item nav-link" routerLinkActive="active-nav">Pipicans</a>
             <a routerLink="/friends" class="nav-item nav-link" routerLinkActive="active-nav">Friends</a>
             <a routerLink="/about-us" class="nav-item nav-link" routerLinkActive="active-nav">About</a>
           </div>         
@@ -43,7 +43,7 @@
       <mat-nav-list class="sidenav-links justify-content-center">
         <h1><strong>MENU</strong></h1>
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/home" (click)="sidenav.toggle()">HOME</a>
-        <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/start-page" (click)="sidenav.toggle()">PIPICANS</a>
+        <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/pipicans" (click)="sidenav.toggle()">PIPICANS</a>
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/friends" (click)="sidenav.toggle()">FRIENDS</a>
         <a *ngIf="userId" mat-list-item class="sidenav-item" routerLink="/about-us" (click)="sidenav.toggle()">ABOUT US</a>
         <a *ngIf="currentUser == undefined" routerLink="/account" class="login-item nav-link py-2 bg-primary text-white px-5 ms-lg-5" (click)="sidenav.toggle()">

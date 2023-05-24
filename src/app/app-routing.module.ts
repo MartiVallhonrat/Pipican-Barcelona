@@ -4,6 +4,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './helpers/auth-guard.service';
 import { FriendsComponent } from './friends/friends.component';
+import { PipicanMapsComponent } from './maps/components/pipican-maps/pipican-maps.component';
 
 const accountModule = () => import("./account/account.module").then(x => x.AccountModule)
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: "account", loadChildren: accountModule},
   {path: "home", component: HomeComponent, canActivate:[AuthGuardService]},
   {path: "about-us", component: WelcomeComponent},
-  {path: "friends", component: FriendsComponent, canActivate:[AuthGuardService]}
+  {path: "friends", component: FriendsComponent, canActivate:[AuthGuardService]},
+  {path: "pipicans", component: PipicanMapsComponent, canActivate:[AuthGuardService]}
 ];
 
 @NgModule({

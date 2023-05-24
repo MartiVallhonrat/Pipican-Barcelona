@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountManagmentService } from './account/account-managment.service';
 import { UserFirebase } from './account/account-interfaces/account.interface'; 
+import { PlacesServiceService } from './maps/services/places-service.service';
 
 
 @Component({
@@ -15,7 +16,9 @@ export class AppComponent implements OnInit {
   currentUser?: UserFirebase;
   urlImage: string = "../assets/profile-placeholder.jpg"
 
-  constructor(private accountService: AccountManagmentService) {
+  constructor(
+    private accountService: AccountManagmentService
+    ) {
     this.accountService.userId.subscribe(x => {
       this.userId = x;
       this.ngOnInit();
