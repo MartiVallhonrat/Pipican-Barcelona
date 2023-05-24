@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { ConfimationDialogComponent } from './edit-account/confimation-dialog/confimation-dialog.component';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -16,7 +17,8 @@ import { ConfimationDialogComponent } from './edit-account/confimation-dialog/co
     LoginComponent,
     RegisterComponent,
     EditAccountComponent,
-    ConfimationDialogComponent
+    ConfimationDialogComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

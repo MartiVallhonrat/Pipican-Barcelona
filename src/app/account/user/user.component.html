@@ -1,0 +1,27 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content *ngIf="isReady" class="m-3">
+            <div>
+                 <div class="profilePicContainer">
+                    <div class="d-flex m-4">
+                        <img *ngIf="user.ProfileImage == null" src="urlImage" class="rounded-circle profilePic" alt="Profile Pic"/>
+                        <img *ngIf="user.ProfileImage !== null" [src]="user.ProfileImage" class="rounded-circle profilePic" alt="Profile Pic"/>
+                    </div>
+                </div>
+            </div>
+                
+            <hr class="m-3">
+
+            <h3 class="fw-bold">{{user.Username.toUpperCase()}}</h3>
+            <h5>{{user.DogBreed}}</h5>
+
+
+            <hr class="m-3">
+
+            <div class="button pt-4">
+                <button *ngIf="!isFriend" (click)="addFriend()" class="w-100 text-white" color="primary" mat-flat-button><mat-icon>person_add</mat-icon>Add {{user.Username}}</button>
+                <button *ngIf="isFriend" (click)="removeFriend()" class="w-100 text-white" color="warn" mat-flat-button><mat-icon>close</mat-icon>Delete {{user.Username}}</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

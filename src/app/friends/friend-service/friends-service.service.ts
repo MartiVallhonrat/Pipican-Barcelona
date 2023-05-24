@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, updateDoc, arrayUnion, setDoc, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, doc, updateDoc, arrayUnion, setDoc, query, where, getDocs, docSnapshots } from '@angular/fire/firestore';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
-import { arrayRemove, collection, getDoc, onSnapshot } from 'firebase/firestore';
+import { QuerySnapshot, arrayRemove, collection, getDoc, onSnapshot } from 'firebase/firestore';
 import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -111,7 +111,7 @@ export class FriendsServiceService {
         const friendsList: any[] = [];
         const usersRef = collection(this.firestore, "users");
         const usersQuery = await query(usersRef, where("id", "in", friendsIdList));
-        const usersQuerySnapshot = (await getDocs(usersQuery));
+        const usersQuerySnapshot = await getDocs(usersQuery);
         usersQuerySnapshot.forEach(doc => friendsList.push({ id: doc.id, ...doc.data() }))
         this.friendListSubject?.next(friendsList);
       } else {
@@ -137,5 +137,18 @@ export class FriendsServiceService {
         friendList: arrayRemove(this.userId)
       });
     };
+  }
+
+  async isFriend(friendId: string): Promise<boolean> {
+    debugger
+    const userFriends = doc(this.firestore, `friends/${this.userId}`);
+    const friendIdListDataSnap = (await getDoc(userFriends));
+    if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0) {
+      return (await friendIdListDataSnap.get("friendList").includes(friendId));
+
+    } else {
+      return false;
+    }
+    
   }
 }
