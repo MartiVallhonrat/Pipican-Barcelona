@@ -7,10 +7,10 @@
                     <h4>Your dog's photo:</h4>
                     <div class="profilePicContainer">
                         <div class="d-flex m-4">
-                            <img [src]="urlImage" class="rounded-circle profilePic" alt="Profile Pic"/>
+                            <img [src]="urlImage" for="customFile2" class="rounded-circle profilePic" alt="Profile Pic"/>
                         </div>
                         <div>
-                            <label class="btn btn-primary form-label text-white m-1" for="customFile2">Choose file</label>
+                            <button mat-flat-button color="primary"><label class="text-white form-label m-1" for="customFile2">Choose file</label></button>
                             <input type="file" class="form-control d-none" id="customFile2" (change)="onSelectFile($event)"/>
                         </div> 
                     </div>

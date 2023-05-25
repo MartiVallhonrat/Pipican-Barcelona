@@ -12,10 +12,10 @@
     <mat-list>
         <div *ngFor="let user of searchedUsers">
             <mat-list-item>
-                <img class="profilePic" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
-                <img class="profilePic" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
-                <div matListItemTitle>{{user.Username}}</div>
-                <div matListItemLine >{{user.DogBreed}}</div>
+                <img class="profilePic" [routerLink]="['/account/user', user.id]" *ngIf="user.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
+                <img class="profilePic" [routerLink]="['/account/user', user.id]" *ngIf="user.ProfileImage !== null" matListItemAvatar [src]="user.ProfileImage" alt="Profile Pic">
+                <div [routerLink]="['/account/user', user.id]" matListItemTitle>{{user.Username}}</div>
+                <div [routerLink]="['/account/user', user.id]" matListItemLine >{{user.DogBreed}}</div>
                 <button matListItemMeta mat-icon-button (click)="addRequest(user.id)">
                     <mat-icon color="primary">person_add</mat-icon>
                 </button>

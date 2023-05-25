@@ -140,10 +140,25 @@ export class FriendsServiceService {
   }
 
   async isFriend(friendId: string): Promise<boolean> {
-    debugger
+    console.log(friendId);
     const userFriends = doc(this.firestore, `friends/${this.userId}`);
     const friendIdListDataSnap = (await getDoc(userFriends));
     if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0) {
+      console.log(friendIdListDataSnap.get("friendList"))
+      return (await friendIdListDataSnap.get("friendList").includes(friendId));
+
+    } else {
+      return false;
+    }
+    
+  }
+
+  async isRequest(friendId: string): Promise<boolean> {
+    console.log(friendId);
+    const userFriends = doc(this.firestore, `friends/${this.userId}`);
+    const friendIdListDataSnap = (await getDoc(userFriends));
+    if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0) {
+      console.log(friendIdListDataSnap.get("friendList"))
       return (await friendIdListDataSnap.get("friendList").includes(friendId));
 
     } else {
