@@ -70,28 +70,28 @@ $my-accent-color: (
 );
 
 $my-warn-color: (
-    50 : #f9e0e0,
-    100 : #f0b3b3,
-    200 : #e68080,
-    300 : #db4d4d,
-    400 : #d42626,
-    500 : #cc0000,
-    600 : #c70000,
-    700 : #c00000,
-    800 : #b90000,
-    900 : #ad0000,
-    A100 : #ffd7d7,
-    A200 : #ffa4a4,
-    A400 : #ff7171,
-    A700 : #ff5858,
+    50 : #fbeded,
+    100 : #f6d1d1,
+    200 : #f0b3b3,
+    300 : #e99494,
+    400 : #e57d7d,
+    500 : #e06666,
+    600 : #dc5e5e,
+    700 : #d85353,
+    800 : #d34949,
+    900 : #cb3838,
+    A100 : #ffffff,
+    A200 : #ffe2e2,
+    A400 : #ffafaf,
+    A700 : #ff9696,
     contrast: (
         50 : #000000,
         100 : #000000,
         200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
         700 : #ffffff,
         800 : #ffffff,
         900 : #ffffff,
@@ -118,6 +118,13 @@ $my-theme: mat.define-light-theme((
 
 html, body { height: 100%; width: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+.marker {
+    background-image: url('assets/pipican-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
 
 $primary: #7ab730;
 $secondary: #ffd33c;
@@ -127,6 +134,7 @@ $secondary: #ffd33c;
     --secondary: #FFD33C;
     --light: #F3F3F3;
     --dark: #212121;
+    --danger: #e06666;
 }
 
 /* Importing Bootstrap SCSS file. */

@@ -1,0 +1,22 @@
+.custom-snackbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    
+    .mat-icon {
+        font-size: 2rem;
+        height: 2rem;
+        width: 2rem;
+    }
+    .first-icon {
+        margin-right: .5rem;
+    }
+    .second-icon {
+        margin-left: 30px;
+    }
+}
+.success-snackbar {
+    --mdc-snackbar-container-color: var(--primary);
+    --mdc-snackbar-supporting-text-color: white;
+}

@@ -11,7 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const MaterialComponents = [
@@ -27,7 +27,7 @@ const MaterialComponents = [
   MatInputModule,
   MatDialogModule,
   MatTabsModule,
-  ScrollingModule
+  MatSnackBarModule
 ]
 
 

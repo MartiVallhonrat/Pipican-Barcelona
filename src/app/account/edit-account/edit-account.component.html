@@ -4,15 +4,13 @@
             <form [formGroup]="form">
 
                 <div>
-                    <h4>Your dog's photo:</h4>
-                    <div class="profilePicContainer">
-                        <div class="d-flex m-4">
-                            <img [src]="urlImage" for="customFile2" class="rounded-circle profilePic" alt="Profile Pic"/>
+                    <h4>Your profile:</h4>
+                    <div class="profilePicContainer m-4">
+                        <label for="customFile2"><img [src]="urlImage" class="rounded-circle profilePic" alt="Profile Pic"/></label>
+                        <div class="middle">
+                            <mat-icon>camera_enhance</mat-icon>
                         </div>
-                        <div>
-                            <button mat-flat-button color="primary"><label class="text-white form-label m-1" for="customFile2">Choose file</label></button>
-                            <input type="file" class="form-control d-none" id="customFile2" (change)="onSelectFile($event)"/>
-                        </div> 
+                        <input type="file" class="form-control d-none" id="customFile2" (change)="onSelectFile($event)"/>
                     </div>
                 </div>
                 

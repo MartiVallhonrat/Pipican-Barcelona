@@ -19,6 +19,8 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { FriendsNotificationsComponent } from './friends/friends-notifications/friends-notifications.component';
+import { CustomSnackbarComponent } from './friends/custom-snackbar/custom-snackbar.component';
+import { CustomSnackbar2Component } from './friends/custom-snackbar2/custom-snackbar2.component';
 
 
 
@@ -31,7 +33,9 @@ import { FriendsNotificationsComponent } from './friends/friends-notifications/f
     FriendsListComponent,
     AddFriendComponent,
     FooterComponent,
-    FriendsNotificationsComponent
+    FriendsNotificationsComponent,
+    CustomSnackbarComponent,
+    CustomSnackbar2Component
   ],
   imports: [
     BrowserModule,

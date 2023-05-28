@@ -16,7 +16,7 @@ export class FriendsNotificationsComponent {
 
   ngOnInit(): void {
     this.friendService.getRequestList();
-    this.friendService.requestList?.subscribe(x => {this.requestList = x; console.log(this.requestList)});
+    this.friendService.requestList?.subscribe(x => this.requestList = x);
   }
 
   acceptRequest(friendId: string){

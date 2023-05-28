@@ -31,7 +31,6 @@ export class FriendsServiceService {
   }
 
   async sendRequest(friendId: string) {
-    debugger
     const requestListRef = doc(this.firestore, `friends/${friendId}`);
     const requestListExists = (await getDoc(requestListRef)).exists();
 
@@ -87,7 +86,6 @@ export class FriendsServiceService {
   async getRequestList() {
     const requestIdListRef = doc(this.firestore, `friends/${this.userId}`);
     onSnapshot(requestIdListRef, async (requestIdListSnap) => {
-      debugger
       if(requestIdListSnap.exists() && requestIdListSnap.get("requestList") !== undefined && requestIdListSnap.get("requestList").length !== 0) {
         const requestIdList = await requestIdListSnap.get("requestList");
         const requestList: any[] = [];
@@ -105,7 +103,6 @@ export class FriendsServiceService {
   async getFriendList() {
     const friendsIdListRef = doc(this.firestore, `friends/${this.userId}`);
     onSnapshot(friendsIdListRef, async (friendsIdListSnap) => {
-      debugger
       if(friendsIdListSnap.exists() && friendsIdListSnap.get("friendList") !== undefined && friendsIdListSnap.get("friendList").length !== 0) {
         const friendsIdList = await friendsIdListSnap.get("friendList");
         const friendsList: any[] = [];
@@ -140,25 +137,9 @@ export class FriendsServiceService {
   }
 
   async isFriend(friendId: string): Promise<boolean> {
-    console.log(friendId);
     const userFriends = doc(this.firestore, `friends/${this.userId}`);
     const friendIdListDataSnap = (await getDoc(userFriends));
     if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0) {
-      console.log(friendIdListDataSnap.get("friendList"))
-      return (await friendIdListDataSnap.get("friendList").includes(friendId));
-
-    } else {
-      return false;
-    }
-    
-  }
-
-  async isRequest(friendId: string): Promise<boolean> {
-    console.log(friendId);
-    const userFriends = doc(this.firestore, `friends/${this.userId}`);
-    const friendIdListDataSnap = (await getDoc(userFriends));
-    if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0) {
-      console.log(friendIdListDataSnap.get("friendList"))
       return (await friendIdListDataSnap.get("friendList").includes(friendId));
 
     } else {

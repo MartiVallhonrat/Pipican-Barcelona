@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { Router } from '@angular/router';
 import { FriendsServiceService } from 'src/app/friends/friend-service/friends-service.service';
 import { AccountManagmentService } from '../account-managment.service';
 import { UserFirebase } from '../account-interfaces/account.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomSnackbarComponent } from 'src/app/friends/custom-snackbar/custom-snackbar.component';
+import { CustomSnackbar2Component } from 'src/app/friends/custom-snackbar2/custom-snackbar2.component';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +22,7 @@ export class UserComponent {
     private route: ActivatedRoute,
     private accountService: AccountManagmentService,
     private friendService: FriendsServiceService,
-    private router: Router
+    private snackBar: MatSnackBar
     ) 
     { 
       this.accountService.getItemById(this.route.snapshot.params["id"])
@@ -32,13 +34,15 @@ export class UserComponent {
       });
     }
 
-  async addFriend() {
-    await this.friendService.sendRequest(this.user.id)
-    this.router.navigate(['/friends']);
+  async addFriend(friendId: string) {
+    await this.friendService.sendRequest(friendId)
+    this.snackBar.openFromComponent(CustomSnackbarComponent, {duration: 2000, panelClass: "success-snackbar"});
   }
-  async removeFriend() {
-    await this.friendService.removeFriend(this.user.id);
-    this.router.navigate(['/friends']);
-  }
+  async removeFriend(friendId: string) {
+    await this.friendService.removeFriend(friendId);
+    await this.snackBar.openFromComponent(CustomSnackbar2Component, {duration: 2000, panelClass: "danger-snackbar"});
+    this.friendService.isFriend(this.user.id)
+      .then(result => {this.isFriend = result});
+  };
   
 }

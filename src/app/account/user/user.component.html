@@ -13,14 +13,16 @@
             <hr class="m-3">
 
             <h3 class="fw-bold">{{user.Username.toUpperCase()}}</h3>
-            <h5>{{user.DogBreed}}</h5>
+            <div class="subtitles mt-1">
+                <h5>{{user.DogBreed}}</h5>
+            </div>
 
 
             <hr class="m-3">
 
             <div class="button pt-4">
-                <button *ngIf="!isFriend" (click)="addFriend()" class="w-100 text-white" color="primary" mat-flat-button><mat-icon>person_add</mat-icon>Add {{user.Username}}</button>
-                <button *ngIf="isFriend" (click)="removeFriend()" class="w-100 text-white" color="warn" mat-flat-button><mat-icon>close</mat-icon>Delete {{user.Username}}</button>
+                <button *ngIf="!isFriend" (click)="addFriend(user.id)" class="w-100 text-white" color="primary" mat-flat-button><mat-icon>person_add</mat-icon>Send {{user.Username}} a friend request</button>
+                <button *ngIf="isFriend" (click)="removeFriend(user.id)" class="w-100 text-white" color="warn" mat-flat-button><mat-icon>close</mat-icon>Remove {{user.Username}} from friends</button>
             </div>
         </mat-card-content>
     </mat-card>

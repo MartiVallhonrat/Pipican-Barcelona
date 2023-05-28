@@ -3,6 +3,8 @@ import { AccountManagmentService } from 'src/app/account/account-managment.servi
 import { FriendsServiceService } from '../friend-service/friends-service.service';
 import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomSnackbarComponent } from '../custom-snackbar/custom-snackbar.component';
 
 @Component({
   selector: 'app-add-friend',
@@ -19,8 +21,9 @@ export class AddFriendComponent {
 
   constructor(
     private accountService: AccountManagmentService,
-    private friendService: FriendsServiceService
-    ) { }
+    private friendService: FriendsServiceService,
+    private snackBar: MatSnackBar
+  ) { }
 
   onSearch() {
     if(this.form.value.searcher == (null || undefined) || this.form.value.searcher.length < 3) {
@@ -32,5 +35,6 @@ export class AddFriendComponent {
 
   async addRequest(friendId: string) {
     await this.friendService.sendRequest(friendId);
+    this.snackBar.openFromComponent(CustomSnackbarComponent, {duration: 2000, panelClass: "success-snackbar"});
   }
 }
