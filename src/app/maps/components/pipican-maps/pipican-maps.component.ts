@@ -43,25 +43,49 @@ export class PipicanMapsComponent implements AfterViewInit {
         for(const location of pipicans) {
           const el = document.createElement('div');
           el.className = 'marker';
+
+          const innerHtmlContent = 
+          `<div class="text-center" style="width: 200px;">
+            <h3> Pipican ${location.addresses_road_name}</h3>
+            <p>${location.addresses_road_name}<span> - ${location.addresses_start_street_number}</span></p>
+          </div>`;          
   
+          const divElement = document.createElement('div');
+          const divButtons = document.createElement('div');
+          const assignBtn1 = document.createElement('div');
+          const assignBtn2 = document.createElement('div');
+
+          divElement.className = "text-center"
+          divButtons.className = "d-flex justify-content-center gap-2";
+
+          assignBtn1.innerHTML = 
+          `<button class="bg-primary border border-primary rounded-circle" style="width: 40px; height: 40px;">
+            <img src="../../../../assets/info.png" alt="info" style="width: 25px; height: 25px;">
+          </button>`
+
+          assignBtn2.innerHTML = 
+          `<button class="bg-white border border-primary rounded-circle" style="width: 40px; height: 40px;">
+            <img src="../../../../assets/direction.png" alt="direction" style="width: 25px; height: 25px;">
+          </button>`
+
+          divButtons.appendChild(assignBtn1);
+          divButtons.appendChild(assignBtn2);
+
+          divElement.innerHTML = innerHtmlContent;
+          divElement.appendChild(divButtons);
+
+          assignBtn1.addEventListener('click', (e) => {
+            console.log(`Button clicked ${location.id}`);
+          });
+          assignBtn2.addEventListener('click', (e) => {
+            console.log('Button clicked 2');
+          });
+
           const marker = new mapboxgl.Marker(el)
             .setLngLat([location.geo_epgs_4326_y, location.geo_epgs_4326_x])
             .setPopup(
               new mapboxgl.Popup({ offset: 25, closeOnMove: true }) 
-                .setHTML(
-                  `<div class="text-center" style="width: 200px;">
-                    <h3> Pipican ${location.addresses_road_name}</h3>
-                    <p>${location.addresses_road_name}<span> - ${location.addresses_start_street_number}</span></p>
-                    <div class="d-flex justify-content-center gap-2">
-                        <button class="bg-primary border border-primary rounded-circle" style="width: 40px; height: 40px;">
-                          <img src="../../../../assets/info.png" alt="info" style="width: 25px; height: 25px;">
-                        </button>
-                        <button class="bg-white border border-primary rounded-circle" style="width: 40px; height: 40px;">
-                          <img src="../../../../assets/direction.png" alt="direction" style="width: 25px; height: 25px;">
-                        </button>
-                    </div>
-                  </div>`
-                )
+                .setDOMContent(divElement)
             )
             .addTo(map);
         }
