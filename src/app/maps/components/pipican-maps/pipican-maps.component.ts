@@ -15,6 +15,7 @@ export class PipicanMapsComponent implements AfterViewInit {
 
   @ViewChild('mapDiv')
   mapDivElement!: ElementRef;
+  isGeoLocationOn: boolean = false;
 
   constructor(private placesService: PlacesServiceService) {}
 
@@ -26,8 +27,7 @@ export class PipicanMapsComponent implements AfterViewInit {
       center: [ 2.16992, 41.3879],
       zoom: 12,
     });
-    const geolocation = map.addControl(
-      new mapboxgl.GeolocateControl({
+    const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
       enableHighAccuracy: true
       },
@@ -35,8 +35,16 @@ export class PipicanMapsComponent implements AfterViewInit {
       showAccuracyCircle: false,
       showUserHeading: true
       })
-    );
-    console.log(geolocation);
+    const geolocation = map.addControl(geolocate);
+
+    geolocate.on('trackuserlocationstart', (e) => {
+      this.isGeoLocationOn = true;
+      console.log("on");
+    });
+    geolocate.on('trackuserlocationend', (e) => {
+      this.isGeoLocationOn = false;
+      console.log("off");
+    });
 
     this.placesService.getPipicans()
       .subscribe(pipicans => {
@@ -73,11 +81,15 @@ export class PipicanMapsComponent implements AfterViewInit {
           divElement.innerHTML = innerHtmlContent;
           divElement.appendChild(divButtons);
 
-          assignBtn1.addEventListener('click', (e) => {
+          assignBtn1.addEventListener('click', () => {
             console.log(`Button clicked ${location.id}`);
           });
-          assignBtn2.addEventListener('click', (e) => {
-            console.log('Button clicked 2');
+          assignBtn2.addEventListener('click', () => {
+            if(!this.isGeoLocationOn) {geolocate.trigger()};
+            geolocate.on('geolocate', (e) => {
+              debugger
+              console.log(e)
+            });
           });
 
           const marker = new mapboxgl.Marker(el)
