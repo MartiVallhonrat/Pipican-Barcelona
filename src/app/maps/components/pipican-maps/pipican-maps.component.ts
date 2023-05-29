@@ -55,7 +55,6 @@ export class PipicanMapsComponent implements AfterViewInit {
           const assignBtn1 = document.createElement('div');
           const assignBtn2 = document.createElement('div');
 
-          divElement.className = "text-center"
           divButtons.className = "d-flex justify-content-center gap-2";
 
           assignBtn1.innerHTML = 
