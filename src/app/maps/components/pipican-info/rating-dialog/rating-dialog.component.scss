@@ -1,0 +1,11 @@
+ngb-rating {
+    color: var(--secondary);
+    font-size: 50px;
+}
+
+@media (min-width: 992px) {
+    ngb-rating {
+        color: var(--secondary);
+        font-size: 80px;
+    } 
+}

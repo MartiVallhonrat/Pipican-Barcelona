@@ -39,10 +39,10 @@ export class EditAccountComponent {
     this.accountService.getItemById(this.userId)
       .subscribe(user => {
         this.currentUser = user;
-        if(this.currentUser == undefined){
+        if(this.currentUser == undefined) {
           return;
         }
-        if(this.currentUser.ProfileImage !== null){
+        if(this.currentUser.ProfileImage !== null) {
           this.urlImage = this.currentUser.ProfileImage;
         }; 
         this.form = this.fb.group({
@@ -56,8 +56,7 @@ export class EditAccountComponent {
       });
   }
 
-  async onSelectFile(e: any){
-    debugger
+  async onSelectFile(e: any) {
     if(e.target.files){
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);

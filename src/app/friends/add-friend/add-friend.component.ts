@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
 import { FriendsServiceService } from '../friend-service/friends-service.service';
-import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
+import { UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackbarComponent } from '../custom-snackbar/custom-snackbar.component';

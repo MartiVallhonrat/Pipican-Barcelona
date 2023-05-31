@@ -125,6 +125,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
     height: 50px;
     cursor: pointer;
 }
+.success-snackbar {
+    --mdc-snackbar-container-color: var(--primary);
+    --mdc-snackbar-supporting-text-color: white;
+}
 
 $primary: #7ab730;
 $secondary: #ffd33c;
