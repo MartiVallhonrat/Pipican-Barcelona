@@ -1,7 +1,8 @@
 mat-tab-group {
     background-color: white;
-    height: 100%;
-    margin-bottom: 100px;
+    right: 0px;
+    width: 100%;
+    height: calc(100% - 48px);
 }
 mat-tab {
     height: 100%;

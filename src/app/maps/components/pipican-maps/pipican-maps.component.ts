@@ -3,6 +3,7 @@ import { Map } from 'mapbox-gl';
 import { PlacesServiceService } from '../../services/places-service.service';
 import mapboxgl from 'mapbox-gl';
 import { Location } from '../../interfaces/maps.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pipican-maps',
@@ -17,7 +18,9 @@ export class PipicanMapsComponent implements AfterViewInit {
   mapDivElement!: ElementRef;
   isGeoLocationOn: boolean = false;
 
-  constructor(private placesService: PlacesServiceService) {}
+  constructor
+  (private placesService: PlacesServiceService,
+    private router: Router) {}
 
   ngAfterViewInit(): void {
     
@@ -82,7 +85,7 @@ export class PipicanMapsComponent implements AfterViewInit {
           divElement.appendChild(divButtons);
 
           assignBtn1.addEventListener('click', () => {
-            console.log(`Button clicked ${location.id}`);
+            this.router.navigate([`/pipicans/info/${location.id}`]);;
           });
           assignBtn2.addEventListener('click', () => {
             if(!this.isGeoLocationOn) {geolocate.trigger()};

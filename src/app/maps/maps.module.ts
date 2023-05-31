@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { MapsRoutingModule } from './maps-routing/maps-routing.module';
+import { MaterialModule } from '../material/material.module';
 import { PipicanMapsComponent } from './components/pipican-maps/pipican-maps.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { PipicanInfoComponent } from './components/pipican-info/pipican-info.component';
 
 
 
 @NgModule({
   declarations: [
     PipicanMapsComponent,
-    LoadingComponent
+    PipicanInfoComponent,
   ],
   imports: [
-    CommonModule
-  ],
-  exports: [
-    PipicanMapsComponent
+    CommonModule,
+    MapsRoutingModule,
+    NgbCarouselModule,
+    MaterialModule
   ]
 })
 export class MapsModule { }
