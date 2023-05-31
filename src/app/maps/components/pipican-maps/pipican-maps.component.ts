@@ -17,6 +17,7 @@ export class PipicanMapsComponent implements AfterViewInit {
   @ViewChild('mapDiv')
   mapDivElement!: ElementRef;
   isGeoLocationOn: boolean = false;
+  currentPosition: any;
 
   constructor
   (private placesService: PlacesServiceService,
@@ -87,12 +88,16 @@ export class PipicanMapsComponent implements AfterViewInit {
           assignBtn1.addEventListener('click', () => {
             this.router.navigate([`/pipicans/info/${location.id}`]);;
           });
-          assignBtn2.addEventListener('click', () => {
+          assignBtn2.addEventListener('click', async () => {
             if(!this.isGeoLocationOn) {geolocate.trigger()};
-            geolocate.on('geolocate', (e) => {
-              debugger
-              console.log(e)
+            const position: any = await new Promise((resolve) => {
+              geolocate.on('geolocate', (position) => {
+                resolve(position);
+              });
             });
+            this.currentPosition = [position.coords.longitude, position.coords.latitude];
+            console.log(this.currentPosition);
+            this.placesService.getRouteBetweenPoints(this.currentPosition, [location.geo_epgs_4326_y, location.geo_epgs_4326_x], map)
           });
 
           const marker = new mapboxgl.Marker(el)
