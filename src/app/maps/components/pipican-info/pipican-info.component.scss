@@ -1,3 +1,18 @@
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color: var(--secondary);
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: var(--secondary);
+  }
 .background {
     right: 0px;
     min-width: 100%;

@@ -18,6 +18,7 @@ export class PipicanInfoComponent {
   ) {}
 
   images = ["../../../assets/pipican-carousel-1.jpg", "../../../assets/pipican-carousel-2.jpg", "../../../assets/pipican-carousel-3.jpg"];
+  currentRate = 3.25;
 
   openDialogRating(): void {
     this.dialog

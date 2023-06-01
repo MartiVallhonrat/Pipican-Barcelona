@@ -1,7 +1,13 @@
 <h1 mat-dialog-title class="fw-bold text-primary">Rate this Pipican</h1>
 <div mat-dialog-content>
     <div class="mb-3 mt-5">
-        <ngb-rating [max]="5" [readonly]="false" [formControl]="ctrl"></ngb-rating>
+        <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&starf;</span>&starf;
+            </span>
+        </ng-template>
+          
+        <ngb-rating [formControl]="ctrl" [starTemplate]="t" [readonly]="false" [max]="5"></ngb-rating>
         <div class="form-text small">
             <div *ngIf="ctrl.invalid && error" class="m-1 text-danger">Please rate this Park</div>
         </div>

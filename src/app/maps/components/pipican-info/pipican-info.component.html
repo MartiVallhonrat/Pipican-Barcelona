@@ -21,7 +21,21 @@
     </ngb-carousel>
     <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-primary m-0"><mat-icon>notifications_active</mat-icon><span class="ms-2">Notify Your Friends!</span></h3>
     <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-dark m-0"><label for="customFile"><mat-icon>camera_enhance</mat-icon><span class="ms-2">Take a Photo of the Park</span></label></h3>
-    <h3 (click)="openDialogRating()" class="user-select-none d-flex align-items-center justify-content-center text-primary border-3 p-3 fw-bold bg-white border border-primary"><mat-icon>star</mat-icon><span class="ms-2">Give Your Opinion</span></h3>
+    <h3 (click)="openDialogRating()" class="m-0 user-select-none d-flex align-items-center justify-content-center text-primary border-3 p-3 fw-bold bg-white border border-primary"><mat-icon>star</mat-icon><span class="ms-2">Give Your Opinion</span></h3>
     <input type="file" class="form-control d-none" id="customFile"/>
-    <div style="min-height: 400px; background-color: red;"></div>
+    <div class="border border-bottom pt-5 d-flex justify-content-center p-3 mb-2 bg-white">
+        <h2 class="fw-bold">Rating:</h2>
+    </div>
+    <div class="d-flex mb-5 justify-content-center">
+        <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&starf;</span>&starf;
+            </span>
+        </ng-template>   
+        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+    </div>
+    <div class="border border-top-0 m-0 d-flex justify-content-center p-3 mb-2 bg-white">
+        <h2 class="fw-bold">Details:</h2>
+    </div>
+    <div style="min-height: 400px; background-color: white;"></div>
 </div>

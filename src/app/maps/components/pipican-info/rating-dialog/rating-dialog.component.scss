@@ -1,11 +1,16 @@
-ngb-rating {
-    color: var(--secondary);
-    font-size: 50px;
-}
 
-@media (min-width: 992px) {
-    ngb-rating {
-        color: var(--secondary);
-        font-size: 80px;
-    } 
-}
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color: var(--secondary);
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: var(--secondary);
+  }
