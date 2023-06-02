@@ -13,7 +13,7 @@ export class PlacesServiceService {
   constructor(
     private firestore: Firestore,
     private directionsApi: DirectionsApiClients
-    ) {}
+  ) {}
 
     getPipicans(): Observable<Location[]> {
 

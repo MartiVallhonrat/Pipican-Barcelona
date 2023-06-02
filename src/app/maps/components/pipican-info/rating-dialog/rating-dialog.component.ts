@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
+import { PipicansServiceService } from 'src/app/maps/services/pipicans-service.service';
 
 @Component({
   selector: 'app-rating-dialog',
@@ -9,7 +10,8 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class RatingDialogComponent {
 
-  constructor(private dialog: MatDialogRef<RatingDialogComponent>) { }
+  constructor(private dialog: MatDialogRef<RatingDialogComponent>,
+    private pipicanService: PipicansServiceService ) { }
 
   ctrl = new FormControl<number | null>(null, Validators.required);
   error: boolean = false;
@@ -22,6 +24,7 @@ export class RatingDialogComponent {
       this.error = true;
       return
     }
+    this.pipicanService.updateRating(this.ctrl.value);
     this.dialog.close(true);
   }
 }

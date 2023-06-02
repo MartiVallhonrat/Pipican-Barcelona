@@ -1,7 +1,7 @@
 
-<div class="container bg-white">
+<div *ngIf="pipican != undefined" class="container bg-white">
     <div></div>
-    <h1 class="border border-top user-select-none d-flex align-items-center bg-white justify-content-center shadow-sm text-center fw-bold gap-3 sticky-top p-3 m-0"><mat-icon>pets</mat-icon><span>PIPICAN BORRELL</span><mat-icon>pets</mat-icon></h1>
+    <h1 class="border border-top user-select-none d-flex align-items-center bg-white justify-content-center shadow-sm text-center fw-bold gap-3 sticky-top p-3 m-0"><mat-icon>pets</mat-icon><span class="letters">PIPICAN {{pipican.addresses_road_name.toUpperCase()}}</span><mat-icon>pets</mat-icon></h1>
     <ngb-carousel class="text-center" *ngIf="images">
         <ng-template ngbSlide>
             <div class="picsum-img-wrapper">
@@ -22,20 +22,32 @@
     <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-primary m-0"><mat-icon>notifications_active</mat-icon><span class="ms-2">Notify Your Friends!</span></h3>
     <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-dark m-0"><label for="customFile"><mat-icon>camera_enhance</mat-icon><span class="ms-2">Take a Photo of the Park</span></label></h3>
     <h3 (click)="openDialogRating()" class="m-0 user-select-none d-flex align-items-center justify-content-center text-primary border-3 p-3 fw-bold bg-white border border-primary"><mat-icon>star</mat-icon><span class="ms-2">Give Your Opinion</span></h3>
-    <input type="file" class="form-control d-none" id="customFile"/>
-    <div class="border border-bottom pt-5 d-flex justify-content-center p-3 mb-2 bg-white">
-        <h2 class="fw-bold">Rating:</h2>
+    <input type="file" class="form-control d-none" id="customFile" (change)="onSelectFile($event)"/>
+    <div class="card-container">
+        <div class="gray-card rounded p-4">
+            <h2 class="fw-bold mb-2">Rating:</h2>
+            <div class="d-flex justify-content-center align-items-center">
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&starf;</span>&starf;
+                    </span>
+                </ng-template>   
+                <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                <span class="ms-1"><h4 class="mb-0 mt-1">({{pipican.countRating}})</h4></span>
+            </div>
+        </div>
+        <div class="gray-card rounded p-4">
+            <h2 class="fw-bold mb-2">Details:</h2>
+            <div class="d-flex justify-content-center align-items-center">
+                <div>
+                    <div class="d-flex flex-column flex-md-row align-items-baseline">
+                        <h4 class="fw-bold">◦ Address:</h4><h5 class="ps-4 ps-md-2">{{pipican.addresses_road_name}}</h5>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row align-items-baseline">
+                        <h4 class="fw-bold">◦ Roadname:</h4><h5 class="ps-4 ps-md-2">{{pipican.addresses_start_street_number}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="d-flex mb-5 justify-content-center">
-        <ng-template #t let-fill="fill">
-            <span class="star" [class.full]="fill === 100">
-                <span class="half" [style.width.%]="fill">&starf;</span>&starf;
-            </span>
-        </ng-template>   
-        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-    </div>
-    <div class="border border-top-0 m-0 d-flex justify-content-center p-3 mb-2 bg-white">
-        <h2 class="fw-bold">Details:</h2>
-    </div>
-    <div style="min-height: 400px; background-color: white;"></div>
 </div>

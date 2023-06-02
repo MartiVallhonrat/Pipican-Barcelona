@@ -1,18 +1,21 @@
+.letters {
+    max-width: 70%;
+}
 .star {
     position: relative;
     display: inline-block;
     font-size: 3rem;
     color: #d3d3d3;
-  }
-  .full {
+}
+.full {
     color: var(--secondary);
-  }
-  .half {
+}
+.half {
     position: absolute;
     display: inline-block;
     overflow: hidden;
     color: var(--secondary);
-  }
+}
 .background {
     right: 0px;
     min-width: 100%;
@@ -37,6 +40,20 @@ ngb-carousel {
     width: 100%;
     height: 300px;
 }
+.card-container {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 580px;
+    margin: 40px;
+    gap: 20px;
+}
+.gray-card {
+    padding: 10px;
+    background-color: rgb(238, 238, 238);
+    width: 100%;
+    height: auto;
+}
 @media (min-width: 650px) {
     ngb-carousel {
         width: 100%;
@@ -46,6 +63,20 @@ ngb-carousel {
         object-fit: cover;
         width: 100%;
         height: 400px;
+    }
+    .card-container {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: 400px;
+        margin: 40px;
+        gap: 20px;
+    }
+    .gray-card {
+        padding: 10px;
+        background-color: rgb(238, 238, 238);
+        width: 100%;
+        height: 200px;
     }
 }
 @media (min-width: 850px) {
