@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-photo-snackbar',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class PhotoSnackbarComponent {
 
+  snackBarRef = inject(MatSnackBarRef);
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RatingDialogComponent } from './rating-dialog/rating-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RatingSnackbarComponent } from './snackbars/rating-snackbar/rating-snackbar.component';
+import { PhotoSnackbarComponent } from './snackbars/photo-snackbar/photo-snackbar.component';
 import { PipicansServiceService } from '../../services/pipicans-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pipicans } from '../../interfaces/pipicans';
@@ -60,5 +61,6 @@ export class PipicanInfoComponent {
 
   onSelectFile(e: any) {
     this.pipicansService.onSelectFile(e);
+    this.snackBar.openFromComponent(PhotoSnackbarComponent, {duration: 2000, panelClass: "success-snackbar"});
   }
 }
