@@ -19,7 +19,7 @@
             </div>
         </ng-template>
     </ngb-carousel>
-    <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-primary m-0"><mat-icon>notifications_active</mat-icon><span class="ms-2">Notify Your Friends!</span></h3>
+    <h3 (click)="openDialogMessage()" class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-primary m-0"><mat-icon>notifications_active</mat-icon><span class="ms-2">Notify Your Friends!</span></h3>
     <h3 class="user-select-none d-flex align-items-center justify-content-center text-white p-3 fw-bold bg-dark m-0"><label for="customFile"><mat-icon>camera_enhance</mat-icon><span class="ms-2">Take a Photo of the Park</span></label></h3>
     <h3 (click)="openDialogRating()" class="m-0 user-select-none d-flex align-items-center justify-content-center text-primary border-3 p-3 fw-bold bg-white border border-primary"><mat-icon>star</mat-icon><span class="ms-2">Give Your Opinion</span></h3>
     <input type="file" class="form-control d-none" id="customFile" (change)="onSelectFile($event)"/>

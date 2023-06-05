@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RatingDialogComponent } from './rating-dialog/rating-dialog.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RatingSnackbarComponent } from './snackbars/rating-snackbar/rating-snackbar.component';
 import { PhotoSnackbarComponent } from './snackbars/photo-snackbar/photo-snackbar.component';
 import { PipicansServiceService } from '../../services/pipicans-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pipicans } from '../../interfaces/pipicans';
+import { NotificationSnackbarComponent } from './snackbars/notification-snackbar/notification-snackbar.component';
 
 @Component({
   selector: 'app-pipican-info',
@@ -30,6 +32,7 @@ export class PipicanInfoComponent {
     this.pipicansService.getItemById(this.route.snapshot.params["id"])
       .subscribe(pipican => {
         this.pipican = pipican;
+        this.pipicansService.pipican = pipican;
         if( pipican.countRating == 0) {
           this.currentRate = 0;
         } else {
@@ -55,6 +58,17 @@ export class PipicanInfoComponent {
       .subscribe((confirmation: Boolean) => {
         if (confirmation) {
           this.snackBar.openFromComponent(RatingSnackbarComponent, {duration: 2000, panelClass: "success-snackbar"});
+        };
+      });
+  }
+
+  openDialogMessage(): void {
+    this.dialog
+      .open(MessageDialogComponent, {width: "500px"})
+      .afterClosed()
+      .subscribe((confirmation: Boolean) => {
+        if (confirmation) {
+          this.snackBar.openFromComponent(NotificationSnackbarComponent, {duration: 2000, panelClass: "success-snackbar",});
         };
       });
   }

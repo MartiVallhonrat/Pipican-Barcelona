@@ -1,0 +1,28 @@
+.letters {
+    max-width: 70%;
+}
+.container {
+    right: 0px;
+    min-width: 100%;
+    margin: 0px;
+    height: calc(100% - 48px);
+    padding: 0px;
+}
+.profilePic{
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}
+.location {
+    display: flex;
+    flex-direction: column;
+    max-height: 42px;
+}
+
+@media (min-width: 576px) {
+
+    .location {
+        display: flex;
+        flex-direction: row;
+    }
+}

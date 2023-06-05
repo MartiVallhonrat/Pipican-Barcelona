@@ -11,6 +11,7 @@ import { RatingSnackbarComponent } from './components/pipican-info/snackbars/rat
 import { PhotoSnackbarComponent } from './components/pipican-info/snackbars/photo-snackbar/photo-snackbar.component';
 import { NotificationSnackbarComponent } from './components/pipican-info/snackbars/notification-snackbar/notification-snackbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MessageDialogComponent } from './components/pipican-info/message-dialog/message-dialog.component';
 
 
 
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RatingSnackbarComponent,
     PhotoSnackbarComponent,
     NotificationSnackbarComponent,
+    MessageDialogComponent,
   ],
   imports: [
     CommonModule,

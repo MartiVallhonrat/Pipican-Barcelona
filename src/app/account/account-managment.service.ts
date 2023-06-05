@@ -87,7 +87,6 @@ export class AccountManagmentService {
     debugger
     const friendIdListRef = doc(this.firestore, `friends/${id}`);
     const friendIdListDataSnap = await getDoc(friendIdListRef);
-    console.log(friendIdListDataSnap.exists(), friendIdListDataSnap.get("friendList"))
     if(friendIdListDataSnap.exists() && friendIdListDataSnap.get("friendList") !== undefined && friendIdListDataSnap.get("friendList").length !== 0){
       const friendIdListData = await friendIdListDataSnap.get("friendList");
       friendIdListData.forEach((friendId: string) => {

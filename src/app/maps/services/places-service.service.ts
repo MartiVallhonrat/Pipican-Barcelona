@@ -22,12 +22,9 @@ export class PlacesServiceService {
     }
 
     getRouteBetweenPoints(start: [number, number], end: [number, number], map: any) {
-      debugger
       this.directionsApi.get<any>(`/${start.join(',')};${end.join(',')}`)
         .subscribe(resp => {
-          console.log(resp)
           if (resp.routes && resp.routes.length > 0 && resp.routes[0] !== undefined) {
-            console.log(resp.routes[0]);
             this.drawPolyline(resp.routes[0], map)
           } else {
             console.error('No routes found');
@@ -35,11 +32,8 @@ export class PlacesServiceService {
     }
 
     private drawPolyline(route: any, map: any) {
-      debugger
-      console.log({distance: route.distance, duration: route.duration / 60});
 
       const coords = route.geometry.coordinates;
-      console.log(coords)
 
       const sourceData: AnySourceData = {
         type: 'geojson',
@@ -56,6 +50,11 @@ export class PlacesServiceService {
             }
           ]
         }
+      }
+
+      if(map.getLayer("RouteString")) {
+        map.removeLayer("RouteString");
+        map.removeSource("RouteString");
       }
 
       map.addSource('RouteString', sourceData);

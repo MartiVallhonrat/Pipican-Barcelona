@@ -1,1 +1,24 @@
-
+<div class="container">
+    <h1 class="border border-top user-select-none d-flex align-items-center bg-white justify-content-center shadow-sm text-center fw-bold gap-3 sticky-top p-3 m-0"><span class="letters">HOME</span></h1>
+    <div *ngIf="notificationList !== undefined">
+        <div class="mx-5" *ngFor="let notification of notificationList">
+            <div class="d-flex flex-start mt-3">
+                <img class="rounded-circle shadow-1-strong me-3 profilePic" [routerLink]="['/account/user', notification.senderId]" *ngIf="notification.senderInfo.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
+                <img class="rounded-circle shadow-1-strong me-3 profilePic" [routerLink]="['/account/user', notification.senderId]" *ngIf="notification.senderInfo.ProfileImage !== null" matListItemAvatar [src]="notification.senderInfo.ProfileImage" alt="Profile Pic">
+                <div>
+                <h6 class="fw-bold mb-1" [routerLink]="['/account/user', notification.senderId]">{{notification.senderInfo.Username}}</h6>
+                <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0 text-primary">
+                        {{notification.timestamp}}
+                    <span class="badge bg-primary ms-2" [routerLink]="['/pipicans/info', notification.pipicanId]">Pipican {{notification.pipicanName}}</span>
+                    </p>
+                </div>
+                <p class="mb-0">
+                    {{notification.message}}
+                </p>
+                </div>
+            </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
+    </div>
+</div>

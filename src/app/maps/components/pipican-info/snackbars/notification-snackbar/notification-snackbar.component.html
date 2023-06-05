@@ -1,1 +1,10 @@
-<p>notification-snackbar works!</p>
+<div class="custom-snackbar">
+    <div class="d-flex align-items-center">
+        <mat-icon>notifications_active</mat-icon>
+        &nbsp;
+        <span class="ms-2">Notification Sended!</span>
+    </div>
+    <button class="second-icon"  (click)="snackBarRef.dismissWithAction()" mat-button>
+        <mat-icon class="text-white">close</mat-icon>
+    </button>
+</div>

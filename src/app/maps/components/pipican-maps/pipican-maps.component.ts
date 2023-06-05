@@ -23,7 +23,7 @@ export class PipicanMapsComponent implements AfterViewInit {
   (private placesService: PlacesServiceService,
     private router: Router) {}
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
     
     const map = new Map({
       container: this.mapDivElement.nativeElement,
@@ -41,13 +41,16 @@ export class PipicanMapsComponent implements AfterViewInit {
       })
     const geolocation = map.addControl(geolocate);
 
+    const position: any = await new Promise((resolve) => {
+      geolocate.on('geolocate', (position) => {
+        resolve(position);
+      });
+    });
     geolocate.on('trackuserlocationstart', (e) => {
       this.isGeoLocationOn = true;
-      console.log("on");
     });
     geolocate.on('trackuserlocationend', (e) => {
       this.isGeoLocationOn = false;
-      console.log("off");
     });
 
     this.placesService.getPipicans()
@@ -90,13 +93,8 @@ export class PipicanMapsComponent implements AfterViewInit {
           });
           assignBtn2.addEventListener('click', async () => {
             if(!this.isGeoLocationOn) {geolocate.trigger()};
-            const position: any = await new Promise((resolve) => {
-              geolocate.on('geolocate', (position) => {
-                resolve(position);
-              });
-            });
+            
             this.currentPosition = [position.coords.longitude, position.coords.latitude];
-            console.log(this.currentPosition);
             this.placesService.getRouteBetweenPoints(this.currentPosition, [location.geo_epgs_4326_y, location.geo_epgs_4326_x], map)
           });
 
