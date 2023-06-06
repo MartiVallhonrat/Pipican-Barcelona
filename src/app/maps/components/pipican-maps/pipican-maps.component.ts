@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Map } from 'mapbox-gl';
 import { PlacesServiceService } from '../../services/places-service.service';
 import mapboxgl from 'mapbox-gl';
-import { Location } from '../../interfaces/maps.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./pipican-maps.component.scss']
 })
 export class PipicanMapsComponent implements AfterViewInit {
-
-  dogAreas?: Location[];
 
   @ViewChild('mapDiv')
   mapDivElement!: ElementRef;
@@ -40,11 +37,13 @@ export class PipicanMapsComponent implements AfterViewInit {
       showUserHeading: true
       })
     const geolocation = map.addControl(geolocate);
+    map.on('load', function() {
+      geolocate.trigger()
+    })
 
-    const position: any = await new Promise((resolve) => {
-      geolocate.on('geolocate', (position) => {
-        resolve(position);
-      });
+    
+    geolocate.on('geolocate', (position: any) => {
+      this.currentPosition = [position.coords.longitude, position.coords.latitude];
     });
     geolocate.on('trackuserlocationstart', (e) => {
       this.isGeoLocationOn = true;
@@ -56,12 +55,19 @@ export class PipicanMapsComponent implements AfterViewInit {
     this.placesService.getPipicans()
       .subscribe(pipicans => {
         for(const location of pipicans) {
+          let rating;
+          if(location.countRating == 0) {
+            rating = 0;
+          } else {
+            rating = location.totalRating / location.countRating;
+          }
           const el = document.createElement('div');
           el.className = 'marker';
 
           const innerHtmlContent = 
           `<div class="text-center" style="width: 200px;">
             <h3> Pipican ${location.addresses_road_name}</h3>
+            <div class="d-flex justify-content-center"><h3 class="text-secondary">&starf;</h3><h3 class="ms-1 text-secondary">${rating}</h3></div>
             <p>${location.addresses_road_name}<span> - ${location.addresses_start_street_number}</span></p>
           </div>`;          
   
@@ -93,8 +99,6 @@ export class PipicanMapsComponent implements AfterViewInit {
           });
           assignBtn2.addEventListener('click', async () => {
             if(!this.isGeoLocationOn) {geolocate.trigger()};
-            
-            this.currentPosition = [position.coords.longitude, position.coords.latitude];
             this.placesService.getRouteBetweenPoints(this.currentPosition, [location.geo_epgs_4326_y, location.geo_epgs_4326_x], map)
           });
 

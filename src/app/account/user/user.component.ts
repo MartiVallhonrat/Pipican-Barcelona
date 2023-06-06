@@ -30,7 +30,7 @@ export class UserComponent {
         this.user = user;
         this.isReady = true;
         this.friendService.isFriend(user.id)
-          .then(result => {this.isFriend = result, console.log(result)});
+          .then(result => {this.isFriend = result});
       });
     }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Firestore, collection , collectionData, addDoc } from '@angular/fire/firestore';
-import { Location } from '../interfaces/maps.interface';
+import { Pipicans } from '../interfaces/pipicans';
 import { DirectionsApiClients } from '../api/directionsApiClient';
 import { AnySourceData } from 'mapbox-gl';
 
@@ -15,10 +15,10 @@ export class PlacesServiceService {
     private directionsApi: DirectionsApiClients
   ) {}
 
-    getPipicans(): Observable<Location[]> {
+    getPipicans(): Observable<Pipicans[]> {
 
       const pipicansRef = collection(this.firestore, "pipicans");
-      return collectionData(pipicansRef, { idField: "id" }) as Observable<Location[]>;
+      return collectionData(pipicansRef, { idField: "id" }) as Observable<Pipicans[]>;
     }
 
     getRouteBetweenPoints(start: [number, number], end: [number, number], map: any) {
