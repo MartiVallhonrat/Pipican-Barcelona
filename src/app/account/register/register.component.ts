@@ -21,7 +21,7 @@ export class RegisterComponent {
   form = new FormGroup({
     Username: new FormControl("", [Validators.required, Validators.minLength(3)]),
     Email: new FormControl("", [Validators.required, Validators.email]),
-    Password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{1,10}$")]),
+    Password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(10)]),
     ProfileImage: new FormControl(null),
     DogBreed: new FormControl(null)
   });

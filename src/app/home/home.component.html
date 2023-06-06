@@ -1,8 +1,8 @@
 <div class="container">
     <h1 class="border border-top user-select-none d-flex align-items-center bg-white justify-content-center shadow-sm text-center fw-bold gap-3 sticky-top p-3 m-0"><span class="letters">HOME</span></h1>
     <div *ngIf="notificationList !== undefined">
-        <div class="mx-5" *ngFor="let notification of notificationList">
-            <div class="d-flex flex-start mt-3">
+        <div *ngFor="let notification of notificationList">
+            <div class="mx-5 d-flex flex-start mt-3">
                 <img class="rounded-circle shadow-1-strong me-3 profilePic" [routerLink]="['/account/user', notification.senderId]" *ngIf="notification.senderInfo.ProfileImage == null" matListItemAvatar src="../../../assets/profile-placeholder.jpg" alt="Profile Pic">
                 <img class="rounded-circle shadow-1-strong me-3 profilePic" [routerLink]="['/account/user', notification.senderId]" *ngIf="notification.senderInfo.ProfileImage !== null" matListItemAvatar [src]="notification.senderInfo.ProfileImage" alt="Profile Pic">
                 <div>
@@ -18,7 +18,7 @@
                 </p>
                 </div>
             </div>
+            <mat-divider class="mt-2"></mat-divider>
         </div>
-        <mat-divider class="mt-2"></mat-divider>
     </div>
 </div>
