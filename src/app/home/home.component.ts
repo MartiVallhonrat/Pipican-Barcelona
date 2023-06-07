@@ -17,6 +17,7 @@ export class HomeComponent {
     this.pipicanService.getNotificationList();
     this.pipicanService.notificationList?.subscribe(x => {
     this.notificationList = x;
+    console.log(this.notificationList)
   })
   }
 }

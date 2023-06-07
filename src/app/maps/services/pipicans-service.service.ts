@@ -8,6 +8,7 @@ import { uploadBytes } from 'firebase/storage';
 import { AccountManagmentService } from 'src/app/account/account-managment.service';
 import { User, UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { FriendsServiceService } from 'src/app/friends/friend-service/friends-service.service';
+import { Notification } from '../interfaces/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class PipicansServiceService {
   userId: string | null = localStorage.getItem("id");
   currentUser?: UserFirebase;
   pipican?: Pipicans;
-  public notificationListSubject?: BehaviorSubject<any[]>;
-  public notificationList?: Observable<any[]>
+  public notificationListSubject?: BehaviorSubject<Notification[]>;
+  public notificationList?: Observable<Notification[]>
 
   constructor(
     private firestore: Firestore,
@@ -27,7 +28,7 @@ export class PipicansServiceService {
     private friendService: FriendsServiceService
   ) 
   {
-    this.notificationListSubject = new BehaviorSubject<any[]>([]);
+    this.notificationListSubject = new BehaviorSubject<Notification[]>([]);
     this.notificationList = this.notificationListSubject?.asObservable();
 
     this.accountService.getItemById(this.userId!)
@@ -121,8 +122,8 @@ export class PipicansServiceService {
     onSnapshot(notificationsRef, async (notificationsSnap) => {
       if(notificationsSnap.exists() && notificationsSnap.get("notifications") !== undefined && notificationsSnap.get("notifications").length !== 0) {
         const notificationsList = await notificationsSnap.get("notifications");
-        const notificationsListId: any = [];
-        notificationsList.forEach((notification: any) => {
+        const notificationsListId: string[] = [];
+        notificationsList.forEach((notification: Notification) => {
           notificationsListId.push(notification.senderId);
         })
         const usersRef = collection(this.firestore, "users");
@@ -131,7 +132,10 @@ export class PipicansServiceService {
         usersQuerySnapshot.forEach(doc => {
           notificationsList.forEach((noti: { senderId: string; senderInfo: { [x: string]: any; }; }) => {
             if(noti.senderId == doc.id) {
-              noti.senderInfo = {...doc.data()};
+              const data: any = {...doc.data()}
+              const ProfileImage = data.ProfileImage;
+              const username = data.Username;
+              noti.senderInfo = {ProfileImage, username};
             }
           })
         });
