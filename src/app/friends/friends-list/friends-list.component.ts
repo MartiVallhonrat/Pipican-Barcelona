@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FriendsServiceService } from '../friend-service/friends-service.service';
 import { UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,12 +14,16 @@ export class FriendsListComponent implements OnInit{
 
   constructor(
     private friendService: FriendsServiceService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.friendService.getFriendList();
-    this.friendService.friendList?.subscribe(x => this.friendList = x)
+    this.friendService.friendList?.subscribe(x => {
+      this.friendList = x;
+      this.changeDetectorRef.detectChanges();
+    })
   }
 
   async removeFriend(friendId: string) {

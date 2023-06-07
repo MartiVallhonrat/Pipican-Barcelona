@@ -71,7 +71,11 @@ export class AccountManagmentService {
       if(doc.id == id) {
         return;
       }
-      result.push({ id: doc.id, ...doc.data()});
+      const data = doc.data();
+      const ProfileImage = data['ProfileImage'];
+      const Username = data['Username'];
+      const DogBreed = data['DogBreed'];
+      result.push({ id: doc.id, Username, ProfileImage, DogBreed });
     })
     return result;
   }

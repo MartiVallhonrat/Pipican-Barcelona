@@ -92,7 +92,13 @@ export class FriendsServiceService {
         const usersRef = collection(this.firestore, "users");
         const usersQuery = await query(usersRef, where("id", "in", requestIdList));
         const usersQuerySnapshot = (await getDocs(usersQuery));
-        usersQuerySnapshot.forEach(doc => requestList.push({ id: doc.id, ...doc.data() }))
+        usersQuerySnapshot.forEach(doc => {
+          const data = doc.data();
+          const ProfileImage = data['ProfileImage'];
+          const Username = data['Username']
+          const DogBreed = data['DogBreed']
+          requestList.push({ id: doc.id, Username, ProfileImage, DogBreed })
+        });
         this.requestListSubject?.next(requestList);
       } else {
         this.requestListSubject?.next([]);
@@ -109,7 +115,13 @@ export class FriendsServiceService {
         const usersRef = collection(this.firestore, "users");
         const usersQuery = await query(usersRef, where("id", "in", friendsIdList));
         const usersQuerySnapshot = await getDocs(usersQuery);
-        usersQuerySnapshot.forEach(doc => friendsList.push({ id: doc.id, ...doc.data() }))
+        usersQuerySnapshot.forEach(doc => {
+          const data = doc.data();
+          const ProfileImage = data['ProfileImage'];
+          const Username = data['Username']
+          const DogBreed = data['DogBreed']
+          friendsList.push({ id: doc.id, Username, ProfileImage, DogBreed })
+        })
         this.friendListSubject?.next(friendsList);
       } else {
         this.friendListSubject?.next([]);

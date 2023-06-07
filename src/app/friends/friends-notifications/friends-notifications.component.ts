@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FriendsServiceService } from '../friend-service/friends-service.service';
 import { UserFirebase } from 'src/app/account/account-interfaces/account.interface';
 
@@ -7,16 +7,20 @@ import { UserFirebase } from 'src/app/account/account-interfaces/account.interfa
   templateUrl: './friends-notifications.component.html',
   styleUrls: ['./friends-notifications.component.scss']
 })
-export class FriendsNotificationsComponent {
+export class FriendsNotificationsComponent implements OnInit {
   requestList: UserFirebase[] = [];
 
   constructor(
-    private friendService: FriendsServiceService
+    private friendService: FriendsServiceService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.friendService.getRequestList();
-    this.friendService.requestList?.subscribe(x => this.requestList = x);
+    this.friendService.requestList?.subscribe(x => {
+      this.requestList = x;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   acceptRequest(friendId: string){

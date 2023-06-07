@@ -6,6 +6,7 @@ import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { uploadBytes, listAll, deleteObject } from 'firebase/storage';
 import { ConfimationDialogComponent } from './confimation-dialog/confimation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-account',
@@ -24,6 +25,7 @@ export class EditAccountComponent {
               private fb: FormBuilder,
               private storage: Storage,
               private dialog: MatDialog,
+              private router: Router
               ) { }
 
   form = new FormGroup({
@@ -75,7 +77,6 @@ export class EditAccountComponent {
         });
       });
 
-      debugger
       const file = e.target.files[0];
       const imgRef = ref(this.storage, `images/${this.userId}/${file.name}`);
       await uploadBytes(imgRef, file);
@@ -99,7 +100,7 @@ export class EditAccountComponent {
           console.log(this.form.value)
           // @ts-ignore
           await this.accountService.updateUser(this.form.value);
-          window.location.replace("/home");
+          this.router.navigate([`/home`]);
         } else {
           this.customError = true;
         }

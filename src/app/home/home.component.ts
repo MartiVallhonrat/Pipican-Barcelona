@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { PipicansServiceService } from '../maps/services/pipicans-service.service';
 
 @Component({
@@ -6,18 +6,20 @@ import { PipicansServiceService } from '../maps/services/pipicans-service.servic
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   notificationList: any = []
 
   constructor(
-    private pipicanService: PipicansServiceService
+    private pipicanService: PipicansServiceService,
+    private changeDetectorRef: ChangeDetectorRef
   ) 
-  {
+  { }
+  ngOnInit(): void {
     this.pipicanService.getNotificationList();
     this.pipicanService.notificationList?.subscribe(x => {
-    this.notificationList = x;
-    console.log(this.notificationList)
-  })
+      this.notificationList = x;
+      this.changeDetectorRef.detectChanges();
+    })
   }
 }

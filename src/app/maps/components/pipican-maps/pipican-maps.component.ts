@@ -95,7 +95,7 @@ export class PipicanMapsComponent implements AfterViewInit {
           divElement.appendChild(divButtons);
 
           assignBtn1.addEventListener('click', () => {
-            this.router.navigate([`/pipicans/info/${location.id}`]);;
+            this.router.navigate([`/pipicans/info/${location.id}`]);
           });
           assignBtn2.addEventListener('click', async () => {
             if(!this.isGeoLocationOn) {geolocate.trigger()};
