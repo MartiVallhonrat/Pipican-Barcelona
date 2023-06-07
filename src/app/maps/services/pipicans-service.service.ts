@@ -134,8 +134,8 @@ export class PipicansServiceService {
             if(noti.senderId == doc.id) {
               const data: any = {...doc.data()}
               const ProfileImage = data.ProfileImage;
-              const username = data.Username;
-              noti.senderInfo = {ProfileImage, username};
+              const Username = data.Username;
+              noti.senderInfo = {ProfileImage, Username};
             }
           })
         });
