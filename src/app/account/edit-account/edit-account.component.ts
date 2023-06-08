@@ -51,7 +51,7 @@ export class EditAccountComponent {
           ProfileImage: new FormControl(this.currentUser.ProfileImage),
           Username: new FormControl(this.currentUser.Username, [Validators.required, Validators.minLength(3)]),
           Email: new FormControl(this.currentUser.Email, [Validators.required, Validators.email]),
-          Password: new FormControl(this.currentUser.Password, [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{1,10}$")]),
+          Password: new FormControl(this.currentUser.Password, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]),
           DogBreed: new FormControl(this.currentUser.DogBreed),
           id: new FormControl(this.currentUser.id)
         });
